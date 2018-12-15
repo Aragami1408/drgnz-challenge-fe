@@ -1,9 +1,28 @@
 #header {
-  flex: 0.055;
+  height: 65px;
   margin-top: 0;
   justify-self: flex-start;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: #fff;
   width: 100%;
-  box-shadow: 0px 1px 10px 1px #23D5AB;
+  box-shadow: 0px 1px 10px 1px #189577;
+
+  .header-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #666;
+    font-size: 20px;
+  }
+
+  .header-user {
+    margin-right: 15px;
+    position: relative;
+  }
+
+  .header-nav {
+    margin-left: 15px;
+  }
+
 }

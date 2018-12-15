@@ -4,7 +4,7 @@ export class Footer extends PureComponent {
   render() {
     return (
       <div id="footer">
-        Made by Drgnz with <img src="/images/heart.png" alt="heart"/>
+        From Drgnz with <img src="/images/heart.png" alt="heart"/>
       </div>
     )
   }

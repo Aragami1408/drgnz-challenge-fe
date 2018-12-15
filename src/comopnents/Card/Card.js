@@ -12,6 +12,19 @@ export class Card extends Component {
     isActive: false,
   }
 
+  renderNewState = () => (
+    <div className="ribbon-new ribbon">
+      <div>New Stage</div>
+    </div>
+  )
+
+  renderNext = () => (
+    <div className="ribbon-countdown ribbon">
+      <div>Available in</div>
+      <div>22 hours 12 minutes 12 seconds</div>
+    </div>
+  )
+
   render() {
     const { name, isActive } = this.props;
     const classList = {
@@ -22,7 +35,7 @@ export class Card extends Component {
     const cardClass = keys(classList).filter(e => classList[e]).join` `;
     return (
       <div className={cardClass}>
-        <div className="card-name">
+        <div className="card-name shine">
           <div>the</div>
           <div>{name}</div>
         </div>

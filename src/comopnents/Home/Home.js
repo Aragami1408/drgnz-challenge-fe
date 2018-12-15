@@ -9,10 +9,10 @@ export class Home extends PureComponent {
           <div className="slider">
             <Card
               name="gate"
+              isActive
             />
             <Card
               name="highland"
-              isActive
             />
             <Card
               name="frozen"

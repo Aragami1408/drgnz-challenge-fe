@@ -1,4 +1,12 @@
 #card-wrapper {
+  height: calc(100% - (25px + 15px + 35px));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
   height: 55%;
   width: calc(335px - 35px);
   display: flex;

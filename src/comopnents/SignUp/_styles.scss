@@ -1,0 +1,16 @@
+.signup-card {
+  height: 55%;
+  width: calc(335px - 35px);
+  display: flex;
+  flex-direction: column;
+  justify-content:  space-around;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px 3px #e7e7e7;
+  padding: 15px 35px;
+  color: #666;
+
+  &+div {
+    width: 100%;
+  }
+}
