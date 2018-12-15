@@ -1,0 +1,24 @@
+#not-found {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-90deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+  .not-found-msg {
+    font-size: 72px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 100px;
+  }
+
+  .not-found-link {
+    font-size: 18px;
+    text-decoration: none;
+  }
+}
