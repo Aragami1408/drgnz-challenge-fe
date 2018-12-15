@@ -1,0 +1,65 @@
+.card {
+  background-color: #fff;
+  height: 70%;
+  max-width: 350px;
+  width: 100%;
+  min-width: 150px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-right: 75px;
+  margin-left: 75px;
+  overflow: hidden;
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  .card-name {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 68px;
+    text-transform: capitalize;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    div {
+      margin-left: 15px;
+    }
+    div:last-child {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.active {
+  height: 80%;
+}
+
+.card-gate {
+  background-image: url('/images/card-gate.jpg');
+  background-position: 40% 0%;
+}
+
+.card-highland {
+  background-image: url('/images/card-highland.jpg');
+  background-position: 90% 75%;
+}
+
+.card-frozen {
+  background-image: url('/images/card-frozen.jpg');
+  background-position: 40% 0%;
+}
+
+.card-blade {
+  background-image: url('/images/card-blade.jpg');
+  background-position: 40% 0%;
+}
+
+.card-bloodmoon {
+  background-image: url('/images/card-bloodmoon.jpg');
+  background-position: 40% 0%;
+}

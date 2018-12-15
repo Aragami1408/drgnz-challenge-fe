@@ -1,0 +1,15 @@
+#footer {
+  flex: 0.05;
+  margin-top: 25px;
+  justify-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+  }
+}
