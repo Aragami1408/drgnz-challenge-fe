@@ -8,6 +8,8 @@
 
 .login-card {
   height: 55%;
+  min-height: 480px;
+  max-height: 680px;
   width: calc(335px - 35px);
   display: flex;
   flex-direction: column;

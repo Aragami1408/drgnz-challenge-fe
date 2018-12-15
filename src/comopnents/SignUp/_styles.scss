@@ -1,5 +1,7 @@
 .signup-card {
   height: 55%;
+  min-height: 480px;
+  max-height: 580px;
   width: calc(335px - 35px);
   display: flex;
   flex-direction: column;

@@ -5,6 +5,7 @@ import SignUp from '../SignUp';
 import Home from '../Home';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
+import About from '../About';
 import { HashRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <Route component={NotFound} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/404" component={NotFound} />
           <Footer />
         </div>
       </Router>

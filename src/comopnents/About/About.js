@@ -1,15 +1,19 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
-export class Home extends PureComponent {
+export class NotFound extends PureComponent {
   render() {
     return (
-      <div>
+      <div id="about">
         <div>
           Card images are belong to <a href="https://duelyst.com/">Duelyst</a> - <a href="https://www.counterplaygames.com/">Counter Play Games</a>.
         </div>
+        <Link to="/" className="about-link">
+          Return challenge
+        </Link>
       </div>
     )
   }
 }
 
-export default Home
+export default NotFound

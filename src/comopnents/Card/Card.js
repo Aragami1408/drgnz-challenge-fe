@@ -5,7 +5,7 @@ import keys from 'lodash/keys';
 export class Card extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    isActive: PropTypes.bool,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -26,11 +26,11 @@ export class Card extends Component {
   )
 
   render() {
-    const { name, isActive } = this.props;
+    const { name, disabled } = this.props;
     const classList = {
       card: true,
       [`card-${name}`]: true,
-      active: isActive,
+      disabled,
     }
     const cardClass = keys(classList).filter(e => classList[e]).join` `;
     return (

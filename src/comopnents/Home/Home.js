@@ -10,20 +10,22 @@ export class Home extends PureComponent {
         <div id="card-container">
           <div className="slider">
             <Card
-              name="gate"
-              isActive
+              name="entrance"
             />
             <Card
               name="highland"
             />
             <Card
               name="frozen"
+              disabled
             />
             <Card
               name="blade"
+              disabled
             />
             <Card
               name="bloodmoon"
+              disabled
             />
           </div>
         </div>
