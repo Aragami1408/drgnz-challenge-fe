@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 export class SignUp extends PureComponent {
   componentDidMount() {
     console.log('Your registration code is: 123456789');
+    document.title = 'Sign Up';
   }
 
   render() {
@@ -26,7 +28,7 @@ export class SignUp extends PureComponent {
           </div>
         </div>
         <div className="card-btn">
-          <a href="/">Sign Up</a>
+          <Link to="/">Sign Up</Link>
         </div>
       </div>
     )

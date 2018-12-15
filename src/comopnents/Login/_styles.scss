@@ -16,6 +16,12 @@
 }
 
 .card-header {
+  font-size: 24px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-input-wrapper {
@@ -79,9 +85,6 @@
   background-image: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);;
   border-radius: 25px;
   height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-transform: uppercase;
   transition: 0.5s ease;
   transition: all 0.45s;
@@ -90,6 +93,11 @@
     color: #fff;
     text-decoration: none;
     font-weight: 650;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   &:hover {
     animation: gradient 10s ease infinite;
@@ -109,4 +117,18 @@
   div:last-child {
     font-size: 12px;
   }
+}
+
+.signup-link, .signup-link:visited  {
+  color: #23A6D5  ;
+  text-decoration: none;
+  font-weight: 650;
+
+}
+
+.card-logo {
+  display: block;
+  width: 75px;
+  height: 75px;
+  margin-bottom: 15px;
 }
