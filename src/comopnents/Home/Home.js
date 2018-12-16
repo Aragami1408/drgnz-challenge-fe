@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Card from '../Card';
 import Header from '../Header';
+import Slider from '../Slider';
 
 export class Home extends PureComponent {
   render() {
@@ -8,7 +9,7 @@ export class Home extends PureComponent {
       <div id="home">
         <Header />
         <div id="card-container">
-          <div className="slider">
+          <Slider>
             <Card
               name="entrance"
             />
@@ -27,7 +28,7 @@ export class Home extends PureComponent {
               name="bloodmoon"
               disabled
             />
-          </div>
+          </Slider>
         </div>
       </div>
     )
