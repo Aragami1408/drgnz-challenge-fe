@@ -9,7 +9,7 @@
 .login-card {
   height: 55%;
   min-height: 480px;
-  max-height: 680px;
+  max-height: 540px;
   width: calc(335px - 35px);
   display: flex;
   flex-direction: column;
@@ -120,6 +120,12 @@
   justify-content: flex-end;
   align-items: center;
 
+  div > a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   div:first-child {
     margin-bottom: 5px;
     font-size: 14px;
@@ -130,7 +136,7 @@
 }
 
 .signup-link, .signup-link:visited  {
-  color: #23A6D5  ;
+  color: #189577;
   text-decoration: none;
   font-weight: 650;
 

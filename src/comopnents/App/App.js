@@ -6,7 +6,8 @@ import Home from '../Home';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
 import About from '../About';
-import { HashRouter as Router, Route } from "react-router-dom";
+import Account from '../Account';
+import { HashRouter as Router, Route, Redirect } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -18,6 +19,8 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/about" component={About} />
           <Route exact path="/404" component={NotFound} />
+          <Route exact path="/account" component={Account} />
+          <Route component={NotFound} />
           <Footer />
         </div>
       </Router>

@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
+import DropdownMenu from '../DropdownMenu';
 
 export class Footer extends PureComponent {
   render() {
@@ -7,7 +8,10 @@ export class Footer extends PureComponent {
       <div id="header">
         <div className="header-nav">{' '}</div>
         <div className="header-title">Drgnz Challenge 2018</div>
-        <div className="header-user">Hi there{username && `, ${username}`}</div>
+        <div className="header-user">
+          <span>Hi there{username && `, ${username}`}</span>
+          <DropdownMenu />
+        </div>
       </div>
     )
   }
