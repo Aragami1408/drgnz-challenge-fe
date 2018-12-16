@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export class SignUp extends PureComponent {
   componentDidMount() {
     console.log('Your registration code is: 123456789');
-    document.title = 'Sign Up';
+    document.title = 'Sign Up - Drgnz Challenge 2018';
   }
 
   render() {

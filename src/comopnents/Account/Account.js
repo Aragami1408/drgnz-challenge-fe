@@ -5,16 +5,22 @@ import { Link } from 'react-router-dom';
 export class Login extends PureComponent {
 
   static propTypes = {
-    username: PropTypes.string.isRequired,
+    username: PropTypes.string,
     fullname: PropTypes.string,
   }
 
   static defaultProps = {
     fullname: '',
+    username: '',
+  }
+
+  goBack = () => {
+    const { history } = this.props;
+    history.goBack();
   }
 
   componentDidMount() {
-    document.title = 'Account & Profile';
+    document.title = 'Account & Profile - Drgnz Challenge 2018';
   }
   render() {
     const { username, fullname } = this.props;
@@ -46,7 +52,7 @@ export class Login extends PureComponent {
               <Link to="/" className="signup-link">Back To Home</Link>
             </div>
             <div>
-              <Link to="/" className="signup-link">Go Back</Link>
+              <div onClick={this.goBack} className="signup-link">Go Back</div>
             </div>
           </div>
         </div>

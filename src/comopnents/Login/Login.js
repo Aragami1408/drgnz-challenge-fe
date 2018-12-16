@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export class Login extends PureComponent {
   componentDidMount() {
-    document.title = 'Login';
+    document.title = 'Login - Drgnz Challenge 2018';
   }
   render() {
     return (

@@ -2,6 +2,10 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
 export class NotFound extends PureComponent {
+  goBack = () => {
+    const { history } = this.props;
+    history.goBack();
+  }
   render() {
     return (
       <div id="about-wrapper">
@@ -73,9 +77,9 @@ export class NotFound extends PureComponent {
               Card's and Stage background's images are belong to <a href="https://duelyst.com/">Duelyst</a> - <a href="https://www.counterplaygames.com/">Counter Play Games</a>
             </div>
           </div>
-          <Link to="/" className="about-link">
-            Return challenge
-          </Link>
+          <div onClick={this.goBack} className="about-link">
+            Go Back
+          </div>
         </div>
       </div>
     )

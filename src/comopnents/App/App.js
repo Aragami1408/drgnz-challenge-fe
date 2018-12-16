@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route } from "react-router-dom";
+import { createBrowserHistory } from 'history'
 import './App.scss';
 import Login from '../Login';
 import SignUp from '../SignUp';
@@ -7,12 +9,12 @@ import Footer from '../Footer';
 import NotFound from '../NotFound';
 import About from '../About';
 import Account from '../Account';
-import { HashRouter as Router, Route, Redirect } from "react-router-dom";
 
+const history = createBrowserHistory();
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="App">
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />

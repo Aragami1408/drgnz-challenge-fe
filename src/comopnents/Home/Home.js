@@ -4,6 +4,9 @@ import Header from '../Header';
 import Slider from '../Slider';
 
 export class Home extends PureComponent {
+  componentDidMount() {
+    document.title = 'Home - Drgnz Challenge 2018';
+  }
   render() {
     return (
       <div id="home">

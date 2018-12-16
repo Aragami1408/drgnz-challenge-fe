@@ -139,7 +139,11 @@
   color: #189577;
   text-decoration: none;
   font-weight: 650;
+}
 
+.signup-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .card-logo {
