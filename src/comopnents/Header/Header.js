@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DropdownMenu from '../DropdownMenu';
 
-export class Footer extends PureComponent {
+export class Header extends PureComponent {
   static propTypes = {
     username: PropTypes.string,
     fullname: PropTypes.string,
@@ -15,6 +15,7 @@ export class Footer extends PureComponent {
 
   render() {
     const { username, fullname } = this.props;
+
     return (
       <div id="header">
         <div className="header-nav">{' '}</div>
@@ -28,4 +29,4 @@ export class Footer extends PureComponent {
   }
  }
 
-export default Footer
+export default Header;
