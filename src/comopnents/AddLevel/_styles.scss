@@ -1,0 +1,40 @@
+.dual-side {
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  align-items: center;
+}
+
+#add-stage-form {
+  height: 90%;
+  min-height: 480px;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content:  space-around;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px 3px #e7e7e7;
+  padding: 15px 35px;
+  color: #666;
+
+  &+div {
+    width: 100%;
+  }
+}
+
+
+#new-stage-preview {
+  height: 90%;
+  min-height: 480px;
+  width: 45% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content:  space-around;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px 3px #e7e7e7;
+  padding: 15px 35px;
+  color: #666;
+  margin-left: 15px;
+}

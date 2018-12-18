@@ -9,6 +9,7 @@ import Footer from '../Footer';
 import NotFound from '../NotFound';
 import About from '../About';
 import Account from '../Account';
+import AddLevel from '../AddLevel';
 
 const history = createBrowserHistory();
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/about" component={About} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="/account" component={Account} />
+          <Route exact path="/admin/add-level" component={AddLevel} />
           <Route component={NotFound} />
           <Footer />
         </div>
