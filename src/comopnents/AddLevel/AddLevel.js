@@ -1,33 +1,52 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactMarkdown from 'react-markdown/with-html';
 import htmlParser from 'react-markdown/plugins/html-parser';
-import { Link } from 'react-router-dom';
+import CodeBlock from './CodeBlock';
 
-export class Login extends PureComponent {
-
-  static propTypes = {
-    username: PropTypes.string,
-    fullname: PropTypes.string,
-  }
-
-  static defaultProps = {
-    fullname: '',
-    username: '',
+export class AddLevel extends PureComponent {
+  state = {
+    stage: '',
+    flag: '',
+    tag: '',
+    desc: '',
+    hint: '',
+    focus: 'desc',
   }
 
   componentDidMount() {
     document.title = 'Admin - Create new level';
-    ReactDOM.render(
-      <ReactMarkdown
-        source={"# Nothing to preview"}
-        escapeHtml={false}
-        astPlugins={[this.parseHtml]}
-      />,
-      document.getElementById('new-level-preview')
-    )
+  }
 
+  componentDidUpdate = (prevState) => {
+    const { desc, hint, focus } = this.state;
+
+    if (
+      prevState.desc !== desc ||
+      prevState.hint !== hint
+    ) {
+      ReactDOM.render(
+        <ReactMarkdown
+          source={this.state[focus]}
+          escapeHtml={false}
+          astPlugins={[this.parseHtml]}
+          renderers={{code: CodeBlock}}
+        />,
+        document.getElementById('new-level-preview')
+      )
+    }
+  }
+
+  handleFocus = (fieldName) => {
+    this.setState({
+      focus: fieldName,
+    })
+  }
+
+  handleOnChange = (fieldName) => (e) => {
+    this.setState({
+      [fieldName]: e.target.value,
+    })
   }
 
   goBack = () => {
@@ -54,28 +73,28 @@ export class Login extends PureComponent {
               <input className="input-form" type="text"/>
             </div>
             <div className="card-input">
+              <div className="input-label">Tag</div>
+              <input className="input-form"/>
+            </div>
+            <div className="card-input">
               <div className="input-label">Description</div>
-              <input className="input-form" type="password"/>
+              <textarea
+                className="input-form"
+                onChange={this.handleOnChange('desc')}
+                onFocus={() => this.handleFocus('desc')}
+              />
             </div>
             <div className="card-input">
               <div className="input-label">Hint</div>
-              <input className="input-form" type="textbox"/>
-            </div>
-            <div className="card-input">
-              <div className="input-label">Tag</div>
-              <input className="input-form" type="password"/>
+              <textarea
+                className="input-form"
+                onChange={this.handleOnChange('hint')}
+                onFocus={() => this.handleFocus('hint')}
+              />
             </div>
           </div>
           <div className="card-btn">
-            <a href="/">Save</a>
-          </div>
-          <div className="card-footer">
-            <div>
-              <Link to="/" className="signup-link">Back To Home</Link>
-            </div>
-            <div>
-              <div onClick={this.goBack} className="signup-link">Go Back</div>
-            </div>
+            <a href="/">Submit</a>
           </div>
         </div>
         <div id="new-level-preview">
@@ -85,4 +104,4 @@ export class Login extends PureComponent {
   }
 }
 
-export default Login
+export default AddLevel

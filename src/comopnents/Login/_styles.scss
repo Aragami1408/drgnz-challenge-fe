@@ -77,6 +77,12 @@
       border-color: transparent;
     }
   }
+
+  textarea.input-form {
+    height: 110px;
+    resize: none;
+  }
+
 }
 
 @keyframes gradient {

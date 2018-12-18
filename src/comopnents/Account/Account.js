@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import * as history from '../../common/history';
 
 export class Login extends PureComponent {
 
@@ -15,7 +16,7 @@ export class Login extends PureComponent {
   }
 
   goBack = () => {
-    const { history } = this.props;
+    // const { history } = this.props;
     history.goBack();
   }
 

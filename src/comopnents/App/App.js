@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route } from "react-router-dom";
-import { createBrowserHistory } from 'history'
+import {  HashRouter as Router, Route } from "react-router-dom";
+import { setHistory } from '../../common/history';
 import './App.scss';
 import Login from '../Login';
 import SignUp from '../SignUp';
@@ -11,11 +11,19 @@ import About from '../About';
 import Account from '../Account';
 import AddLevel from '../AddLevel';
 
-const history = createBrowserHistory();
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.router = React.createRef();
+  }
+
+  componentDidMount() {
+    setHistory(this.router.current.history);
+  }
+
   render() {
     return (
-      <Router history={history}>
+      <Router ref={this.router}>
         <div className="App">
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
