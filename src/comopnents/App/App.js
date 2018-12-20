@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-import {  HashRouter as Router, Route } from "react-router-dom";
-import { setHistory } from '../../common/history';
-import './App.scss';
-import Login from '../Login';
-import SignUp from '../SignUp';
-import Home from '../Home';
-import Footer from '../Footer';
-import NotFound from '../NotFound';
-import About from '../About';
-import Account from '../Account';
-import AddLevel from '../AddLevel';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -20,6 +10,19 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import { setHistory } from '../../common/history';
+import './App.scss';
+import Login from '../Login';
+import SignUp from '../SignUp';
+import Home from '../Home';
+import Footer from '../Footer';
+import NotFound from '../NotFound';
+import About from '../About';
+import Account from '../Account';
+import AddLevel from '../AddLevel';
+import Level from '../Level';
+import Stage from '../Stage';
+import Ranking from '../Ranking';
 
 library.add(
   fab,
@@ -29,7 +32,7 @@ library.add(
   faQuestionCircle,
   faChevronRight,
   faChevronLeft,
-)
+);
 
 class App extends Component {
   constructor(props) {
@@ -51,6 +54,9 @@ class App extends Component {
           <Route exact path="/about" component={About} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="/account" component={Account} />
+          <Route exact path="/rank" component={Ranking} />
+          <Route exact path="/level/:id" component={Level} />
+          <Route exact path="/stage/:id" component={Stage} />
           <Route exact path="/admin/add-level" component={AddLevel} />
           <Route component={NotFound} />
           <Footer />
