@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && surge ./build --domain https://drgnz-challenge.surge.sh"
+    "deploy": "react-scripts build && surge ./build --domain https://drgnz-challenges.surge.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
