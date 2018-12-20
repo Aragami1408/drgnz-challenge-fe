@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NextArrow = ({ onClick }) => (
@@ -14,6 +15,9 @@ const NextArrow = ({ onClick }) => (
       }}
     />
   </div>
-)
+);
 
+NextArrow.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 export default NextArrow;
