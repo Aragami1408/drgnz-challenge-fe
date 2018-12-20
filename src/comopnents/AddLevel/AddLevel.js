@@ -1,10 +1,15 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactMarkdown from 'react-markdown/with-html';
 import htmlParser from 'react-markdown/plugins/html-parser';
 import CodeBlock from './CodeBlock';
 
 export class AddLevel extends PureComponent {
+  static propTypes = {
+    history: PropTypes.objectOf(PropTypes.any).isRequired,
+  }
+
   state = {
     stage: '',
     flag: '',
@@ -14,39 +19,35 @@ export class AddLevel extends PureComponent {
     focus: 'desc',
   }
 
+  parseHtml = htmlParser({
+    isValidNode: node => node.type !== 'script',
+    processingInstructions: [/* ... */],
+  })
+
   componentDidMount() {
     document.title = 'Admin - Create new level';
   }
 
   componentDidUpdate = (prevState) => {
-    const { desc, hint, focus } = this.state;
+    const {
+      desc, hint, focus,
+      [focus]: kFocus,
+    } = this.state;
 
     if (
-      prevState.desc !== desc ||
-      prevState.hint !== hint
+      prevState.desc !== desc
+      || prevState.hint !== hint
     ) {
       ReactDOM.render(
         <ReactMarkdown
-          source={this.state[focus]}
+          source={kFocus}
           escapeHtml={false}
           astPlugins={[this.parseHtml]}
-          renderers={{code: CodeBlock}}
+          renderers={{ code: CodeBlock }}
         />,
-        document.getElementById('new-level-preview')
-      )
+        document.getElementById('new-level-preview'),
+      );
     }
-  }
-
-  handleFocus = (fieldName) => {
-    this.setState({
-      focus: fieldName,
-    })
-  }
-
-  handleOnChange = (fieldName) => (e) => {
-    this.setState({
-      [fieldName]: e.target.value,
-    })
   }
 
   goBack = () => {
@@ -54,10 +55,18 @@ export class AddLevel extends PureComponent {
     history.goBack();
   }
 
-  parseHtml = htmlParser({
-    isValidNode: node => node.type !== 'script',
-    processingInstructions: [/* ... */]
-  })
+  handleFocus = (fieldName) => {
+    this.setState({
+      focus: fieldName,
+    });
+  }
+
+  handleOnChange = fieldName => (e) => {
+    this.setState({
+      [fieldName]: e.target.value,
+    });
+  }
+
 
   render() {
     return (
@@ -66,15 +75,15 @@ export class AddLevel extends PureComponent {
           <div className="card-input-wrapper">
             <div className="card-input">
               <div className="input-label">Select Stage</div>
-              <input className="input-form" type="text"/>
+              <input className="input-form" type="text" />
             </div>
             <div className="card-input">
               <div className="input-label">Flag</div>
-              <input className="input-form" type="text"/>
+              <input className="input-form" type="text" />
             </div>
             <div className="card-input">
               <div className="input-label">Tag</div>
-              <input className="input-form"/>
+              <input className="input-form" />
             </div>
             <div className="card-input">
               <div className="input-label">Description</div>
@@ -97,11 +106,10 @@ export class AddLevel extends PureComponent {
             <a href="/">Submit</a>
           </div>
         </div>
-        <div id="new-level-preview">
-        </div>
+        <div id="new-level-preview" />
       </div>
-    )
+    );
   }
 }
 
-export default AddLevel
+export default AddLevel;
