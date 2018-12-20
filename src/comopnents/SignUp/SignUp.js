@@ -17,15 +17,15 @@ export class SignUp extends PureComponent {
           <div className="card-input-wrapper">
             <div className="card-input">
               <div className="input-label">Username</div>
-              <input className="input-form" type="text"/>
+              <input className="input-form" type="text" />
             </div>
             <div className="card-input">
               <div className="input-label">Password</div>
-              <input className="input-form" type="password"/>
+              <input className="input-form" type="password" />
             </div>
             <div className="card-input">
               <div className="input-label">Registration Code</div>
-              <input className="input-form" type="string"/>
+              <input className="input-form" type="string" />
             </div>
           </div>
           <div className="card-btn">
@@ -33,8 +33,8 @@ export class SignUp extends PureComponent {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default SignUp
+export default SignUp;
