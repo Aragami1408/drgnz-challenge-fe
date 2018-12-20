@@ -12,6 +12,12 @@ export class Card extends Component {
     isActive: false,
   }
 
+  constructor(props) {
+    super(props);
+    this.card = React.createRef();
+  }
+
+
   renderNewState = () => (
     <div className="ribbon-new ribbon">
       <div>New Stage</div>
@@ -34,7 +40,7 @@ export class Card extends Component {
     }
     const cardClass = keys(classList).filter(e => classList[e]).join` `;
     return (
-      <div className={cardClass}>
+      <div className={cardClass} ref={this.card}>
         <div className="card-name shine">
           <div>the</div>
           <div>{name}</div>

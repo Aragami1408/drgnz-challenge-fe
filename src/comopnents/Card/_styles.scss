@@ -1,13 +1,36 @@
+.slider-custom {
+  height: 100%;
+  position: relative;
+}
+
+.slick-list {
+  height: 100%;
+  .slick-track {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .slick-slide {
+      height: 100%;
+      &>div {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
 .card {
   background-color: #fff;
   height: 70%;
   max-height: 720px;
-  width: 30%;
+  width: 75% !important;
   min-width: 150px;
+  max-width: 360px;
   border-radius: 20px;
   display: inline-block;
-  margin-left: 5%;
-  // margin-left: 3.333%;
   overflow: hidden;
   transition: height .3s ease;
   &:last-child {

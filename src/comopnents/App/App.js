@@ -10,6 +10,26 @@ import NotFound from '../NotFound';
 import About from '../About';
 import Account from '../Account';
 import AddLevel from '../AddLevel';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import {
+  faSignOutAlt,
+  faHome,
+  faUserCircle,
+  faQuestionCircle,
+  faChevronRight,
+  faChevronLeft,
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+  fab,
+  faSignOutAlt,
+  faHome,
+  faUserCircle,
+  faQuestionCircle,
+  faChevronRight,
+  faChevronLeft,
+)
 
 class App extends Component {
   constructor(props) {

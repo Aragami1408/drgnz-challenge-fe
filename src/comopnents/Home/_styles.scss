@@ -8,3 +8,35 @@
   overflow: hidden;
   position: relative;
 }
+
+.prev-arrow, .next-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  cursor: pointer;
+  background: #189577;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  transition: .3s ease;
+
+  &:hover {
+    top: calc(50% - 5px);
+    width: 45px;
+    height: 45px;
+  }
+
+
+}
+
+.next-arrow {
+  right: 0px;
+  margin-right: 15px;
+}
+
+.prev-arrow {
+  margin-left: 15px;
+}
