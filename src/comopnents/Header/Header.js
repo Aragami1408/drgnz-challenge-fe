@@ -21,7 +21,7 @@ export class Header extends PureComponent {
         <div className="header-nav">{' '}</div>
         <div className="header-title">Drgnz Challenge 2018</div>
         <div className="header-user">
-          <span>Hi there{`, ${username || fullname || 'Drgnz'}`}</span>
+          <span>{`Hi there, ${username || fullname || 'Drgnz'}`}</span>
           <DropdownMenu />
         </div>
       </div>

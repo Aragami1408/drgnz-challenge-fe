@@ -1,11 +1,14 @@
 // configureStore.js
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { createMigrate, persistStore, persistReducer } from 'redux-persist';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
 import storage from 'redux-persist/lib/storage';
-import migration from './migration';
 
-import rootReducer from '../reducers';
+import rootSaga from '../sagas';
+import rootReducer, { REHYDRATION_COMPLETE } from '../reducers';
+import migration from './migration';
 
 const persistConfig = {
   key: 'root',
@@ -16,10 +19,18 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+const sagaMiddleware = createSagaMiddleware();
 
 export default () => {
-  const store = createStore(persistedReducer);
-  const persistor = persistStore(store);
+  const store = createStore(
+    persistedReducer,
+    {},
+    composeWithDevTools(applyMiddleware(
+      sagaMiddleware,
+    )),
+  );
+  sagaMiddleware.run(rootSaga);
+  const persistor = persistStore(store, null, () => store.dispatch({ type: REHYDRATION_COMPLETE }));
   return { store, persistor };
 };
 
