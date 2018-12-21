@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 
 export class NotFound extends PureComponent {
@@ -5,6 +7,7 @@ export class NotFound extends PureComponent {
     const { history } = this.props;
     history.goBack();
   }
+
   render() {
     return (
       <div id="about-wrapper">
@@ -15,72 +18,54 @@ export class NotFound extends PureComponent {
               What is Drgnz Challenge 2018?
             </div>
             <div className="content">
-              Drgnz Challenge 2018 is a CTF-like game for DNH community.
+              Drgnz Challenge 2018 is a CTF game for DNH community.
             </div>
             <div className="header">
-              Who is this game about?
+              What is this game about?
             </div>
             <div className="content">
               This game is about solving Software Engineering and Computer Science problems.
             </div>
             <div className="header">
-              Can I join this game?
-            </div>
-            <div className="content">
-              Yes! Everybody can join this game. Not only DNH members.
-            </div>
-            <div className="header">
-              What is CTF likes game?
+              What is a CTF game?
             </div>
             <div className="content">
               <div className="sub-content">
-                CTF stands for <b>Capture The Flags</b>. In this game, you will be given a list of problems. You have to solve each problem for the flag hidden inside the problem.
+                CTF stands for Capture The Flags.
               </div>
               <div className="sub-content">
-               <b>The complete flag</b> is usually in <b>{`Drgnz{flag}`}</b> format. In some problems, only a part of a flag will be given. With that problem, you have to complete the flag yourself. By putting the incomplete flag to the flag header <b>{`Drgnz{your_incomplete_flag}`}</b> you will get the complete one! i.e <b>{`Drgnz{hello_world}`}</b>
-              </div>
-            </div>
-            <div className="header">
-              What is a stage?
-            </div>
-            <div className="content">
-              <div className="sub-content">
-                A stage is a thing containing many levels. Each stage has its own difficulties. A stage can be <b>locked</b> or <b>hidden</b>. You will be able to unlock a stage by archive a given condition. Special stages require <b>hidden conditions</b> to unlock.
-              </div>
-              <div className="sub-content">
-                A hidden stage is a special one which is not shown on the <b>stage selection screen</b>. You have to find it yourself.
+              In this game, you will be given a list of problems. You need to solve the problem in order to obtain the flag associated with that problem. Complete flags are usually in <b>{`Drgnz{flag}`}</b> format. There will be problems in which only a part of a flag can be achieved. These problems require you to complete the flag by yourself by putting the parts to the flag header. For example: <b>{`hello_world to Drgnz{hello_world}`}</b>
               </div>
             </div>
             <div className="header">
               How many stages are there in this game?
             </div>
             <div className="content">
-              There are 5 stages in this game. Listed below and ordered by the difficulty.
-              <ul>
-                <li>The Entrance</li>
-                <li>The Highland</li>
-                <li>The Frozen</li>
-                <li>The Blade</li>
-                <li>The Bloodmoon</li>
-              </ul>
+              <div className="sub-content">
+                There are 5 stages in this game. Each stage consists of many levels with its own level of difficulty. There are locked stages which require you to unlock by achieving certain conditions. There are also special stages with hidden conditions. Lastly, there are also hidden stages which will not appear on the stage selection screen so you will need to find them yourself. Listed below are the stages in ascending order of difficulty
+              </div>
+              <div className="sub-content">
+                Listed below are the stages in ascending order of difficulty
+                <ul>
+                  <li>The Entrance</li>
+                  <li>The Highland</li>
+                  <li>The Frozen</li>
+                  <li>The Blade</li>
+                  <li>The Bloodmoon</li>
+                </ul>
+              </div>
             </div>
             <div className="header">
-              What is a level?
+              What do you need to succeed the game?
             </div>
             <div className="content">
-              A level has a problem. When you solve a problem, you will get a flag. Submit the flag for the next level.
+               Knowledge of Mathematics, Cryptography, Algorithm and Computer Science Concept likes OOP, Debugging, Design Pattern, etc.
             </div>
             <div className="header">
-              What is a problem about?
+              Can I discuss this game on social media or forum?
             </div>
             <div className="content">
-              Mathematics, Cryptography, Algorithm and Computer Science Concept likes OOP, Debugging, Design Pattern, etc.
-            </div>
-            <div className="header">
-              Can I discuss about the game on social media or forum?
-            </div>
-            <div className="content">
-              Feel free to discuss the problems. And we would appreciate if you share the game to everyone you know. However, <b>we don't want you to share the flags that you've solved.</b> From this game, we want to share people about Computer Science, Software Engineering concept. Hence, sharing the flag is taking a chance for a beginner to challenge themselves. So, <b>please give the beginner a guide they need, not the flag they want!</b>
+              It is encouraged that you share the game to others. You can freely discuss the problems but not the “flag” (answer). This is to ensure that everyone has the chance to challenge themselves.
             </div>
             <div className="header">
               Copyright

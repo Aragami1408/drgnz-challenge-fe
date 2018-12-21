@@ -12,6 +12,12 @@
   padding: 15px 35px;
   color: #666;
 
+  .input-error {
+    color: crimson;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
   &+div {
     width: 100%;
   }

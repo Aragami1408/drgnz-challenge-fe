@@ -72,6 +72,10 @@
     border-bottom: 1px solid #999;
     -webkit-font-smoothing: antialiased;
 
+    &.has-error {
+      background-image: linear-gradient(to right,#EE7752 0,#E73C7E 100%);
+    }
+
     &:hover,
     &:focus {
       border-color: transparent;
@@ -105,7 +109,7 @@
   transition: 0.5s ease;
   transition: all 0.45s;
   background-size: 400% 400%;
-  a {
+  a, button {
     color: #fff;
     text-decoration: none;
     font-weight: 650;
@@ -114,6 +118,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: transparent;
+    border: none;
+    outline: none;
   }
   &:hover {
     animation: gradient 10s ease infinite;
