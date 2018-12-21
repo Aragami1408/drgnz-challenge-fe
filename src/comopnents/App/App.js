@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -23,6 +24,8 @@ import AddLevel from '../AddLevel';
 import Level from '../Level';
 import Stage from '../Stage';
 import Ranking from '../Ranking';
+import AuthRoute from '../AuthRoute';
+import NotAuthRoute from '../NotAuthRoute';
 
 library.add(
   fab,
@@ -35,6 +38,14 @@ library.add(
 );
 
 class App extends Component {
+  static propTypes = {
+    IAmDrgnz: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    IAmDrgnz: false,
+  }
+
   constructor(props) {
     super(props);
     this.router = React.createRef();
@@ -45,19 +56,19 @@ class App extends Component {
   }
 
   render() {
+    const { IAmDrgnz } = this.props;
     return (
       <Router ref={this.router}>
         <div className="App">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
+          <AuthRoute exact path="/" component={Home} />
+          <NotAuthRoute exact path="/login" component={Login} />
+          <NotAuthRoute exact path="/signup" component={SignUp} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/404" component={NotFound} />
-          <Route exact path="/account" component={Account} />
-          <Route exact path="/rank" component={Ranking} />
-          <Route exact path="/level/:id" component={Level} />
-          <Route exact path="/stage/:id" component={Stage} />
-          <Route exact path="/admin/add-level" component={AddLevel} />
+          <AuthRoute exact path="/account" component={Account} />
+          <AuthRoute exact path="/rank" component={Ranking} />
+          <AuthRoute exact path="/level/:id" component={Level} />
+          <AuthRoute exact path="/stage/:id" component={Stage} />
+          {IAmDrgnz && <AuthRoute exact path="/admin/add-level" component={AddLevel} />}
           <Route component={NotFound} />
           <Footer />
         </div>

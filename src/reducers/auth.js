@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const AUTH_USER_LOGIN_SUCCESS_TOKEN = 'auth/LOGIN_SUCCESS_TOKEN';
+export const AUTH_USER_LOGIN_SUCCESS_TOKEN = 'auth/LOGIN_SUCCESS';
 export const AUTH_USER_LOGIN_FAIL = 'auth/LOGIN_FAIL';
 export const AUTH_USER_LOGIN_START = 'auth/LOGIN_START';
 export const AUTH_CONFIRM_USER_VALIDATE = 'auth/CONFIRM_USER_VALIDATED';

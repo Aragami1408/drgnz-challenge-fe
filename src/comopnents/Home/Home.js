@@ -10,7 +10,7 @@ const settings = {
   speed: 500,
   slidesToShow: 5,
   slidesToScroll: 1,
-  className: "slider-custom",
+  className: 'slider-custom',
   // arrows: false,
   nextArrow: (<NextArrow />),
   prevArrow: (<PrevArrow />),
@@ -43,20 +43,10 @@ const settings = {
 };
 
 export class Home extends PureComponent {
-
-  constructor(props) {
-    super(props);
-
-    const name = ['entrance', 'highland', 'frozen', 'blade', 'bloodmoon'];
-
-    for (let i = 0; i < name.length; i++)
-      this[name[i]] = React.createRef();
-  }
-
-
   componentDidMount() {
     document.title = 'Home - Drgnz Challenge 2018';
   }
+
   render() {
     return (
       <div id="home">
@@ -89,7 +79,7 @@ export class Home extends PureComponent {
           </Slider>
         </div>
       </div>
-    )
+    );
   }
 }
 
