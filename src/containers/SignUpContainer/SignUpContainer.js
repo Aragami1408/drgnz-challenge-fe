@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import  { actions, getAuthStatus, getAuthError } from '../../reducers/auth';
-import Login from '../../comopnents/Login';
+import SignUp from '../../comopnents/SignUp';
 
 const mapStateToProps = state => ({
   isLoading: getAuthStatus(state),
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  login: actions.login,
+  register: actions.register,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

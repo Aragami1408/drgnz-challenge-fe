@@ -3,27 +3,27 @@ import moment from 'moment';
 export const LOGIN_START = 'auth/LOGIN_START';
 export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'auth/LOGIN_FAILED';
-
+export const SIGNUP_START = 'auth/SIGNUP_START';
+export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
+export const SIGNUP_FAILED = 'auth/SIGNUP_FAILED';
 
 export const initialState = {
   username: null,
   token: null,
   authenticated: null,
   timestamp: null,
-  isLoggingIn: null,
+  isLoading: null,
   error: null,
 };
 
 export const getAuth = ({ auth }) => auth.authenticated;
 export const getAuthError = ({ auth }) => auth.error;
-export const getLoginStatus = ({ auth }) => auth.isLoggingIn;
+export const getAuthStatus = ({ auth }) => auth.isLoading;
 
 // action creators
-
 const login = (username, password) => ({
   type: LOGIN_START,
   payload: {
-    timestamp: moment().utc().format(),
     username,
     password,
   },
@@ -39,6 +39,32 @@ const loginFailed = error => ({
 const loginSuccess = token => ({
   type: LOGIN_SUCCESS,
   payload: {
+    timestamp: moment().utc().format(),
+    token,
+  },
+});
+// ============ register ===================
+const register = (username, password, recaptcha) => ({
+  type: SIGNUP_START,
+  payload: {
+    recaptcha,
+    username,
+    password,
+  },
+});
+
+const registerFailed = error => ({
+  type: SIGNUP_FAILED,
+  payload: {
+    error,
+  },
+});
+
+const registerSuccess = (username, token) => ({
+  type: SIGNUP_SUCCESS,
+  payload: {
+    timestamp: moment().utc().format(),
+    username,
     token,
   },
 });
@@ -46,31 +72,52 @@ const loginSuccess = token => ({
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_START: {
-      const { timestamp, username } = action.payload;
+      const { username } = action.payload;
       return {
         ...state,
-        timestamp,
         username,
-        isLoggingIn: true,
+        isLoading: true,
         authenticated: false,
         error: null,
       };
     }
+    case SIGNUP_FAILED:
     case LOGIN_FAILED: {
       const { error } = action.payload;
       return {
         ...state,
-        isLoggingIn: false,
+        isLoading: false,
         authenticated: false,
         error,
       };
     }
     case LOGIN_SUCCESS: {
-      const { token } = action.payload;
+      const { token, timestamp } = action.payload;
       return {
         ...state,
         token,
-        isLoggingIn: false,
+        timestamp,
+        isLoading: false,
+        authenticated: true,
+        error: null,
+      };
+    }
+    case SIGNUP_START: {
+      return {
+        ...state,
+        isLoading: true,
+        authenticated: false,
+        error: null,
+      };
+    }
+    case SIGNUP_SUCCESS: {
+      const { username, token, timestamp } = action.payload;
+      return {
+        ...state,
+        timestamp,
+        username,
+        token,
+        isLoading: false,
         authenticated: true,
         error: null,
       };
@@ -83,6 +130,9 @@ export const actions = {
   login,
   loginFailed,
   loginSuccess,
+  register,
+  registerFailed,
+  registerSuccess,
 };
 
 // Selectors

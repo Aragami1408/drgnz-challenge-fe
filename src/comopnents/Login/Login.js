@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 export class Login extends PureComponent {
   static propTypes = {
     login: PropTypes.func.isRequired,
-    isLoggingIn: PropTypes.bool,
+    isLoading: PropTypes.bool,
     errorMsg: PropTypes.string,
   }
 
   static defaultProps = {
-    isLoggingIn: false,
+    isLoading: false,
     errorMsg: '',
   }
 
@@ -24,10 +24,12 @@ export class Login extends PureComponent {
   }
 
   handleLogin = () => {
-    const { login, isLoggingIn } = this.props;
-    if (isLoggingIn) return;
+    const { login, isLoading } = this.props;
+    if (isLoading) return;
     const { username, password } = this.state;
-    login(username.trim(), password.trim());
+    if (!username || !username.trim()) return;
+    if (!password) return;
+    login(username.trim().toLowerCase(), password);
   }
 
   handleFieldChange = field => ({ target: { value } }) => this.setState({
@@ -36,7 +38,7 @@ export class Login extends PureComponent {
 
   render() {
     const { username, password } = this.state;
-    const { isLoggingIn, errorMsg } = this.props;
+    const { isLoading, errorMsg } = this.props;
 
     return (
       <div id="card-wrapper">
@@ -68,8 +70,8 @@ export class Login extends PureComponent {
           </div>
           <div className="card-btn">
             <button onClick={this.handleLogin} type="submit">
-              {isLoggingIn && (<div className="loader" />)}
-              {isLoggingIn ? 'Please wait' : 'Login'}
+              {isLoading && (<div className="loader" />)}
+              {isLoading ? 'Please wait' : 'Login'}
             </button>
           </div>
           <div className="card-footer">

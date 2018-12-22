@@ -10,7 +10,9 @@ module.exports = {
             {
                 "allowModules": ["prop-types"],
             }
-        ]
+        ],
+        "no-continue": 0,
+        "import/no-named-as-default-member": 0,
     },
     "globals": {
         "document": true,

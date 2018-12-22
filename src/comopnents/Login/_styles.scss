@@ -109,6 +109,10 @@
   transition: 0.5s ease;
   transition: all 0.45s;
   background-size: 400% 400%;
+  cursor: pointer;
+  &.disable {
+    background-image: linear-gradient(-45deg, #aaa, #333);
+  }
   a, button {
     color: #fff;
     text-decoration: none;
@@ -121,6 +125,7 @@
     background: transparent;
     border: none;
     outline: none;
+    cursor: pointer;
   }
   &:hover {
     animation: gradient 10s ease infinite;

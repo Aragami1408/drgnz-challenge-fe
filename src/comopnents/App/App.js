@@ -15,7 +15,7 @@ import { setHistory, setRouter } from '../../common/history';
 import './App.scss';
 import { SET_TOP_HISTORY_COMPLETE } from '../../reducers';
 import Login from '../../containers/LoginContainer';
-import SignUp from '../SignUp';
+import SignUp from '../../containers/SignUpContainer';
 import Home from '../Home';
 import Footer from '../Footer';
 import NotFound from '../NotFound';

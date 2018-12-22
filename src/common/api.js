@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiUrl = 'https://drgnz-challenge-zkuefmyjwn.now.sh';
+// const apiUrl = 'https://drgnz-challenge-zkuefmyjwn.now.sh';
+const apiUrl = 'http://localhost:3001';
 // authenticate path
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
@@ -31,6 +32,7 @@ const login = async (formData, optionalConfig = {}) => {
       baseURL: apiUrl,
       url: LOGIN_PATH,
       headers: {
+        ...(axios.defaults.headers || {}),
         'Content-Type': 'application/json',
       },
       data: formData,
@@ -41,7 +43,7 @@ const login = async (formData, optionalConfig = {}) => {
   }
 };
 
-const register = async (optionalConfig = {}) => {
+const register = async (formData, optionalConfig = {}) => {
   try {
     const response = await axios({
       ...optionalConfig,
@@ -52,6 +54,7 @@ const register = async (optionalConfig = {}) => {
         ...(axios.defaults.headers || {}),
         'Content-Type': 'application/json',
       },
+      data: formData,
     });
     return { response };
   } catch (error) {
