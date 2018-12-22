@@ -1,12 +1,9 @@
 import moment from 'moment';
 
-export const AUTH_USER_LOGIN_SUCCESS_TOKEN = 'auth/LOGIN_SUCCESS';
-export const AUTH_USER_LOGIN_FAIL = 'auth/LOGIN_FAIL';
-export const AUTH_USER_LOGIN_START = 'auth/LOGIN_START';
-export const AUTH_CONFIRM_USER_VALIDATE = 'auth/CONFIRM_USER_VALIDATED';
-export const AUTH_VALIDATE_USER = 'auth/VALIDATE_USER';
-export const AUTH_USER_LOGOUT_START = 'auth/LOGOUT_START';
-export const AUTH_USER_LOGOUT = 'auth/LOGOUT';
+export const LOGIN_START = 'auth/LOGIN_START';
+export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'auth/LOGIN_FAILED';
+
 
 export const initialState = {
   username: null,
@@ -14,81 +11,78 @@ export const initialState = {
   authenticated: null,
   timestamp: null,
   isLoggingIn: null,
-  error: undefined,
+  error: null,
 };
+
+export const getAuth = ({ auth }) => auth.authenticated;
+export const getAuthError = ({ auth }) => auth.error;
+export const getLoginStatus = ({ auth }) => auth.isLoggingIn;
 
 // action creators
 
-const loginWithToken = (token, username) => ({
-  type: AUTH_USER_LOGIN_SUCCESS_TOKEN,
+const login = (username, password) => ({
+  type: LOGIN_START,
   payload: {
-    timestamp: moment().format(),
-    token,
+    timestamp: moment().utc().format(),
     username,
+    password,
   },
 });
 
-const logoutUser = () => ({
-  type: AUTH_USER_LOGOUT_START,
+const loginFailed = error => ({
+  type: LOGIN_FAILED,
+  payload: {
+    error,
+  },
 });
 
-const loginUser = () => ({
-  type: AUTH_USER_LOGIN_START,
-});
-
-const confirmUserValidated = () => ({
-  type: AUTH_CONFIRM_USER_VALIDATE,
+const loginSuccess = token => ({
+  type: LOGIN_SUCCESS,
+  payload: {
+    token,
+  },
 });
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case AUTH_USER_LOGIN_START: {
-      return {
-        ...initialState,
-        isLoggingIn: true,
-      };
-    }
-    case AUTH_USER_LOGIN_SUCCESS_TOKEN: {
-      const { token, timestamp, username } = action.payload;
+    case LOGIN_START: {
+      const { timestamp, username } = action.payload;
       return {
         ...state,
         timestamp,
-        token,
         username,
-        isLoggingIn: false,
-        authenticated: true,
-        error: undefined,
+        isLoggingIn: true,
+        authenticated: false,
+        error: null,
       };
     }
-
-    case AUTH_USER_LOGIN_FAIL: {
-      const { error } = action;
+    case LOGIN_FAILED: {
+      const { error } = action.payload;
       return {
         ...state,
-        error,
         isLoggingIn: false,
         authenticated: false,
+        error,
       };
     }
-    case AUTH_CONFIRM_USER_VALIDATE: {
+    case LOGIN_SUCCESS: {
+      const { token } = action.payload;
       return {
         ...state,
-        authenticated: true,
+        token,
         isLoggingIn: false,
+        authenticated: true,
+        error: null,
       };
-    }
-    case AUTH_USER_LOGOUT: {
-      return initialState;
     }
     default: return state;
   }
 }
 
 export const actions = {
-  loginUser,
-  logoutUser,
-  loginWithToken,
-  confirmUserValidated,
+  login,
+  loginFailed,
+  loginSuccess,
 };
 
 // Selectors

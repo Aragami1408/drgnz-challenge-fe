@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = 'https://drgnzchallenge-wpqqfujtiy.now.sh';
+const apiUrl = 'https://drgnz-challenge-zkuefmyjwn.now.sh';
 // authenticate path
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
@@ -22,17 +22,18 @@ const setToken = (token) => {
 
 /* eslint-disable camelcase */
 
-const login = async (optionalConfig = {}) => {
+const login = async (formData, optionalConfig = {}) => {
   try {
+    // const request = await axios.post(`${apiUrl}${LOGIN_PATH}`, formData);
     const response = await axios({
       ...optionalConfig,
       method: 'POST',
       baseURL: apiUrl,
       url: LOGIN_PATH,
       headers: {
-        ...(axios.defaults.headers || {}),
         'Content-Type': 'application/json',
       },
+      data: formData,
     });
     return { response };
   } catch (error) {
@@ -58,11 +59,25 @@ const register = async (optionalConfig = {}) => {
   }
 };
 
+const getNiceErrorMsg = (response) => {
+  const { status, data } = response;
+
+  if (status >= 500) {
+    return 'Server is unreachable';
+  }
+  if (status >= 400) {
+    if (data.message) return data.message;
+    if (!data.token) return 'Wrong password';
+  }
+  return 'Unknown error';
+};
+
 const Api = {
   setDefaults,
   setToken,
   login,
   register,
+  getNiceErrorMsg,
 };
 
 export default Api;

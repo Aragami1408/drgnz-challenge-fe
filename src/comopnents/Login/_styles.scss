@@ -165,3 +165,25 @@
   height: 75px;
   margin-bottom: 15px;
 }
+
+.input-error {
+  color: crimson;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.loader{
+  border: 2px solid;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border-color:#fff #fff #fff transparent;
+  animation: spin 2s linear infinite;
+  margin-right: 5px;
+}
+
+@keyframes spin{
+  100%{
+    transform:rotate(360deg);
+  }
+}

@@ -1,16 +1,10 @@
 import {
-  call, put, select, all, take,
+  call, put, select, all, take, race,
 } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import Api from '../common/api';
 import {
-  AUTH_USER_LOGIN_SUCCESS_TOKEN,
-  AUTH_USER_LOGIN_FAIL,
-  AUTH_USER_LOGIN_START,
-  AUTH_USER_LOGOUT_START,
-  AUTH_USER_LOGOUT,
-  isAuthenticated,
-  hasPreviouslyAuthenticated,
-  getToken,
+  LOGIN_START,
   actions as authAction,
 } from '../reducers/auth';
 import { push } from '../common/history';
@@ -22,6 +16,31 @@ export function* navigateOnTokenAuth() {
 }
 
 export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
+  while (true) {
+    const { payload } = yield take(LOGIN_START);
+    try {
+      const { login, timeout } = yield race({
+        login: call(Api.login, payload),
+        timeout: call(delay, 15000),
+      });
+      if (timeout) {
+        yield put(authAction.loginFailed('Unable to login. Please try again later!'));
+        continue;
+      }
+      const { error, response } = login;
+      if (error) {
+        yield put(authAction.loginFailed(Api.getNiceErrorMsg(error.response)));
+        continue;
+      }
+      const { data } = response;
+      yield put(authAction.loginSuccess(data.token));
+      push('/');
+      // yield put()
+    } catch (error) {
+      yield put(error);
+      console.log(error);
+    }
+  }
 }
 
 export function* handleUserLogout() {

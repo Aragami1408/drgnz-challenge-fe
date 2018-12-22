@@ -11,9 +11,10 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { setHistory } from '../../common/history';
+import { setHistory, setRouter } from '../../common/history';
 import './App.scss';
-import Login from '../Login';
+import { SET_TOP_HISTORY_COMPLETE } from '../../reducers';
+import Login from '../../containers/LoginContainer';
 import SignUp from '../SignUp';
 import Home from '../Home';
 import Footer from '../Footer';
@@ -40,35 +41,43 @@ library.add(
 class App extends Component {
   static propTypes = {
     IAmDrgnz: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
+    authenticated: PropTypes.bool,
   }
 
   static defaultProps = {
     IAmDrgnz: false,
-  }
-
-  constructor(props) {
-    super(props);
-    this.router = React.createRef();
+    authenticated: false,
   }
 
   componentDidMount() {
-    setHistory(this.router.current.history);
+    setHistory(this.router.history);
+    setRouter(this.router);
   }
 
   render() {
-    const { IAmDrgnz } = this.props;
+    const { IAmDrgnz, dispatch, authenticated } = this.props;
     return (
-      <Router ref={this.router}>
+      <Router ref={(router) => {
+        this.router = router;
+        dispatch({ type: SET_TOP_HISTORY_COMPLETE });
+      }}
+      >
         <div className="App">
-          <AuthRoute exact path="/" component={Home} />
-          <NotAuthRoute exact path="/login" component={Login} />
-          <NotAuthRoute exact path="/signup" component={SignUp} />
+          <AuthRoute
+            exact
+            path="/"
+            component={Home}
+            authenticated={authenticated}
+          />
+          <NotAuthRoute exact path="/login" component={Login} authenticated={authenticated} />
+          <NotAuthRoute exact path="/signup" component={SignUp} authenticated={authenticated} />
           <Route exact path="/about" component={About} />
-          <AuthRoute exact path="/account" component={Account} />
-          <AuthRoute exact path="/rank" component={Ranking} />
-          <AuthRoute exact path="/level/:id" component={Level} />
-          <AuthRoute exact path="/stage/:id" component={Stage} />
-          {IAmDrgnz && <AuthRoute exact path="/admin/add-level" component={AddLevel} />}
+          <AuthRoute exact path="/account" component={Account} authenticated={authenticated} />
+          <AuthRoute exact path="/rank" component={Ranking} authenticated={authenticated} />
+          <AuthRoute exact path="/level/:id" component={Level} authenticated={authenticated} />
+          <AuthRoute exact path="/stage/:id" component={Stage} authenticated={authenticated} />
+          {IAmDrgnz && <AuthRoute exact path="/admin/add-level" component={AddLevel} authenticated={authenticated} />}
           <Route component={NotFound} />
           <Footer />
         </div>
