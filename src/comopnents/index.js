@@ -14,7 +14,11 @@ const AppRoot = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <AppComponent />
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+      />
     </PersistGate>
   </Provider>
 );

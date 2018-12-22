@@ -24,11 +24,18 @@ export const info = (msg) => {
   });
 };
 
+export const defaultToast = (msg) => {
+  toast(msg, {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+}
+
 const Toast = {
   success,
   warning,
   error,
   info,
+  defaultToast,
 };
 
 export default Toast;

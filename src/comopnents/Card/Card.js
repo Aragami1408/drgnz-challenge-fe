@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import keys from 'lodash/keys';
+import Toast from '../../common/toast';
 
 export class Card extends Component {
   static propTypes = {
@@ -9,14 +10,8 @@ export class Card extends Component {
   }
 
   static defaultProps = {
-    isActive: false,
+    disabled: false,
   }
-
-  constructor(props) {
-    super(props);
-    this.card = React.createRef();
-  }
-
 
   renderNewState = () => (
     <div className="ribbon-new ribbon">
@@ -31,16 +26,28 @@ export class Card extends Component {
     </div>
   )
 
+  handleStageSelection = () => {
+    const { disabled } = this.props;
+    if (disabled) {
+      Toast.defaultToast('Currently unavailable');
+    } else {
+      Toast.defaultToast('Available soon');
+    }
+  }
+
   render() {
     const { name, disabled } = this.props;
     const classList = {
       card: true,
       [`card-${name}`]: true,
       disabled,
-    }
+    };
     const cardClass = keys(classList).filter(e => classList[e]).join` `;
     return (
-      <div className={cardClass} ref={this.card}>
+      <div
+        className={cardClass}
+        onClick={this.handleStageSelection}
+      >
         <div className="card-name shine">
           <div>the</div>
           <div>{name}</div>
@@ -50,4 +57,4 @@ export class Card extends Component {
   }
 }
 
-export default Card
+export default Card;

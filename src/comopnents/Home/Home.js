@@ -60,6 +60,7 @@ export class Home extends PureComponent {
             <Card
               ref={this.highland}
               name="highland"
+              disabled
             />
             <Card
               ref={this.frozen}
