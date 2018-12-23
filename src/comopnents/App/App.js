@@ -129,7 +129,7 @@ class App extends Component {
       stageErrorMsg, isLoading, authenticated,
     } = this.props;
 
-    if (!authenticated) return this.render();
+    if (!authenticated) return this.renderRouter();
     if (isLoading) return this.renderLoading();
     if (requiresDownload && stageErrorMsg) return this.renderError(stageErrorMsg);
     if (requiresDownload && isDownloadingStage) return this.renderLoading();
