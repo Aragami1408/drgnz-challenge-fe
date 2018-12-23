@@ -5,12 +5,16 @@ import Header from '../../containers/Header';
 export class Stage extends Component {
   static propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    downloadStageDetail: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    const { match } = this.props;
+    const {
+      match, downloadStageDetail,
+    } = this.props;
     const { params } = match;
-    console.log(params.id);
+
+    downloadStageDetail(params.id);
   }
 
   render() {

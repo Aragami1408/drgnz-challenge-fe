@@ -18,6 +18,11 @@ const NextArrow = ({ onClick }) => (
 );
 
 NextArrow.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
+
+NextArrow.defaultProps = {
+  onClick: () => null,
+};
+
 export default NextArrow;

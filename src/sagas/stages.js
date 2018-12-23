@@ -6,6 +6,7 @@ import Api from '../common/api';
 import Toast from '../common/toast';
 import {
   GET_STAGES_START,
+  GET_STAGE_DETAIL_START,
   actions as stageAction,
 } from '../reducers/stages';
 
@@ -29,13 +30,43 @@ export function* handleDownloadingStages() {
     const { data } = response;
     yield put(stageAction.getStagesSuccess(data));
   } catch (error) {
-    yield put(error);
+    yield put(stageAction.getStagesFailed(error));
     console.log(error);
+  }
+}
+
+export function* handleDownloadingStageDetail() {
+  while (true) {
+    const { payload } = yield take(GET_STAGE_DETAIL_START);
+    try {
+      const { id } = payload;
+      const { downloadStageDetail, timeout } = yield race({
+        downloadStageDetail: call(Api.downloadStageDetail, id),
+        timeout: call(delay, 15000),
+      });
+      if (timeout) {
+        yield put(stageAction.downloadStageDetailFailed('Unable to connect to server.\nPlease try again later!'));
+        Toast.error('Unable to connect to server.\nPlease try again later!');
+        continue;
+      }
+      const { error, response } = downloadStageDetail;
+      if (error) {
+        yield put(stageAction.downloadStageDetailFailed(Api.getNiceErrorMsg(error.response)));
+        continue;
+      }
+      const { data } = response;
+      console.log(data);
+      yield put(stageAction.downloadStageDetailSuccess(data));
+    } catch (error) {
+      yield put(stageAction.downloadStageDetailFailed(error));
+      console.log(error);
+    }
   }
 }
 
 export default function* authFlow() {
   yield all([
     handleDownloadingStages(),
+    handleDownloadingStageDetail(),
   ]);
-};
+}

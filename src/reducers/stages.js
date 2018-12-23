@@ -5,8 +5,10 @@ export const GET_STAGES_SUCCESS = 'stages/GET_STAGES_SUCCESS';
 export const GET_STAGES_FAILED = 'stages/GET_STAGES_FAILED';
 export const STAGES_APPEND = 'stages/STAGES_APPEND';
 export const STAGE_SELECT_ID = 'stages/STAGE_SELECT_ID';
-export const STAGE_SELECT_OBJECT = 'stages/STAGE_SELECT_OBJECT';
 export const STAGE_SELECT_INDEX = 'stages/STAGE_SELECT_INDEX';
+export const GET_STAGE_DETAIL_START = 'stages/GET_STAGE_DETAIL_START';
+export const GET_STAGE_DETAIL_SUCCESS = 'stages/GET_STAGE_DETAIL_SUCCESS';
+export const GET_STAGE_DETAIL_FAILED = 'stages/GET_STAGE_DETAIL_FAILED';
 
 export const initialState = {
   stages: [],
@@ -48,13 +50,6 @@ const selectStageById = id => ({
   },
 });
 
-const setCurrentStage = stage => ({
-  type: STAGE_SELECT_OBJECT,
-  payload: {
-    stage,
-  },
-});
-
 const selectStageByIndex = index => ({
   type: STAGE_SELECT_INDEX,
   payload: {
@@ -62,16 +57,38 @@ const selectStageByIndex = index => ({
   },
 });
 
+const downloadStageDetail = id => ({
+  type: GET_STAGE_DETAIL_START,
+  payload: {
+    id,
+  },
+});
+
+const downloadStageDetailSuccess = stage => ({
+  type: GET_STAGE_DETAIL_SUCCESS,
+  payload: {
+    stage,
+  },
+});
+
+const downloadStageDetailFailed = error => ({
+  type: GET_STAGE_DETAIL_FAILED,
+  payload: {
+    error,
+  },
+});
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case GET_STAGE_DETAIL_START:
     case GET_STAGES_START: {
       return {
         ...state,
         isLoading: true,
-        currentStage: null,
         error: null,
       };
     }
+    case GET_STAGE_DETAIL_FAILED:
     case GET_STAGES_FAILED: {
       const { error } = action.payload;
       return {
@@ -105,11 +122,11 @@ export default function reducer(state = initialState, action) {
         currentStage: state.stages[index] || state.currentStage,
       };
     }
-    case STAGE_SELECT_OBJECT: {
+    case GET_STAGE_DETAIL_SUCCESS: {
       const { stage } = action.payload;
       return {
         ...state,
-        currentStage: stage || state.currentStage,
+        currentStage: stage,
       };
     }
     case TRANSACTION_CLEAR: {
@@ -131,7 +148,9 @@ export const actions = {
   appendStages,
   selectStageById,
   selectStageByIndex,
-  setCurrentStage,
+  downloadStageDetail,
+  downloadStageDetailFailed,
+  downloadStageDetailSuccess,
 };
 
 // Selectors

@@ -11,7 +11,7 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { setHistory, setRouter } from '../../common/history';
+import { setHistory, setRouter, checkExistance } from '../../common/history';
 import './App.scss';
 import { SET_TOP_HISTORY_COMPLETE } from '../../reducers';
 import Login from '../../containers/Login';
@@ -23,7 +23,7 @@ import About from '../About';
 import Account from '../Account';
 import AddLevel from '../AddLevel';
 import Level from '../Level';
-import Stage from '../Stage';
+import Stage from '../../containers/Stage';
 import Ranking from '../Ranking';
 import AuthRoute from '../AuthRoute';
 import NotAuthRoute from '../NotAuthRoute';
@@ -40,14 +40,15 @@ library.add(
 
 class App extends Component {
   static propTypes = {
-    IAmDrgnz: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
     getStages: PropTypes.func.isRequired,
-    clearTransaction: PropTypes.func.isRequired,
+
+    stageErrorMsg: PropTypes.string,
+
+    IAmDrgnz: PropTypes.bool,
     authenticated: PropTypes.bool,
     requiresDownload: PropTypes.bool,
     isDownloadingStage: PropTypes.bool,
-    stageErrorMsg: PropTypes.string,
   }
 
   static defaultProps = {
@@ -58,16 +59,12 @@ class App extends Component {
     stageErrorMsg: '',
   }
 
-  componentDidMount() {
-    const { clearTransaction } = this.props;
-    clearTransaction();
-  }
-
   componentDidUpdate = () => {
     const {
       getStages, authenticated, isDownloadingStage,
       requiresDownload, stageErrorMsg,
     } = this.props;
+
     if (stageErrorMsg || isDownloadingStage) return;
     if (authenticated && requiresDownload) {
       getStages();
@@ -97,6 +94,7 @@ class App extends Component {
     return (
       <Router ref={(router) => {
         if (!router) return;
+        if (checkExistance()) return;
         setHistory(router.history);
         setRouter(router);
         dispatch({ type: SET_TOP_HISTORY_COMPLETE });
@@ -125,7 +123,11 @@ class App extends Component {
   }
 
   render() {
-    const { requiresDownload, isDownloadingStage, stageErrorMsg } = this.props;
+    const {
+      requiresDownload, isDownloadingStage,
+      stageErrorMsg,
+    } = this.props;
+
     if (requiresDownload && stageErrorMsg) return this.renderError(stageErrorMsg);
     if (requiresDownload && isDownloadingStage) return this.renderLoading();
     return this.renderRouter();

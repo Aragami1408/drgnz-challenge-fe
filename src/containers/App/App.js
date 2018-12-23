@@ -1,6 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getAuth } from '../../reducers/auth';
+import {
+  getAuth,
+} from '../../reducers/auth';
 import {
   getError, getStageList,
   getStatus, actions as StagesActions,

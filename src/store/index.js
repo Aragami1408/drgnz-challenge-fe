@@ -14,7 +14,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 0,
-  blacklist: [],
+  blacklist: ['system'],
   migrate: createMigrate(migration, { debug: true }),
 };
 

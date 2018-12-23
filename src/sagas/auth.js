@@ -2,14 +2,16 @@ import {
   call, put, select, all, take, race,
 } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import decode from 'jwt-decode';
 import Api from '../common/api';
 import Toast from '../common/toast';
 import {
   LOGIN_START,
   SIGNUP_START,
+  VALIDATE_TOKEN,
   actions as authAction,
+  getToken,
 } from '../reducers/auth';
-import { push } from '../common/history';
 
 export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
   while (true) {
@@ -32,7 +34,6 @@ export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
       const { data } = response;
       yield call(Api.setToken, data.token);
       yield put(authAction.loginSuccess(data.token));
-      push('/');
       // yield put()
     } catch (error) {
       yield put(authAction.loginFailed(error));
@@ -41,7 +42,33 @@ export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
   }
 }
 
-export function* handleUserLogout() {
+export function* validateToken() { // eslint-disable-line no-underscore-dangle
+  while (true) {
+    yield take(VALIDATE_TOKEN);
+    try {
+      const token = yield select(getToken);
+      const { id } = decode(token) || {};
+      const { checkToken, timeout } = yield race({
+        checkToken: call(Api.getUserDetail, id, token),
+        timeout: call(delay, 15000),
+      });
+      if (timeout) {
+        Toast.error('Unable to connect to server.\nPlease try again later!');
+        return;
+      }
+      const { error, response } = checkToken;
+      if (error) {
+        yield put(authAction.logout(Api.getNiceErrorMsg(error.response)));
+        Toast.error('Your session is expired! Please login again!');
+        return;
+      }
+      const { data } = response;
+      yield call(Api.setToken, data.token);
+      yield put(authAction.loginSuccess(data.token));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export function* handleRegistration() {
@@ -67,7 +94,6 @@ export function* handleRegistration() {
       const { username, token } = data;
       yield call(Api.setToken, data.token);
       yield put(authAction.registerSuccess(username, token));
-      push('/');
     } catch (error) {
       yield put(authAction.registerFailed(error));
       console.log(error);
@@ -78,7 +104,7 @@ export function* handleRegistration() {
 export default function* authFlow() {
   yield all([
     handleUserLogin(),
-    handleUserLogout(),
     handleRegistration(),
+    validateToken(),
   ]);
 }

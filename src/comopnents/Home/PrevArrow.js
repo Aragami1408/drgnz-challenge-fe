@@ -18,6 +18,11 @@ const PrevArrow = ({ onClick }) => (
 );
 
 PrevArrow.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
+
+PrevArrow.defaultProps = {
+  onClick: () => null,
+};
+
 export default PrevArrow;

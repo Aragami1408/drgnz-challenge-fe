@@ -7,6 +7,7 @@ const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
 const STAGE_PATH = '/api/stage';
+const USER_PATH = '/api/user';
 
 const setDefaults = (defaults) => {
   Object.keys(defaults).forEach((key) => {
@@ -82,6 +83,24 @@ const downloadStages = async (optionalConfig = {}) => {
   }
 };
 
+const downloadStageDetail = async (id, optionalConfig = {}) => {
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'GET',
+      baseURL: apiUrl,
+      url: `${STAGE_PATH}/${id}`,
+      headers: {
+        ...(axios.defaults.headers || {}),
+        'Content-Type': 'application/json',
+      },
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const getNiceErrorMsg = (response) => {
   const { status, data } = response;
 
@@ -96,6 +115,28 @@ const getNiceErrorMsg = (response) => {
   return 'Unknown error';
 };
 
+const getUserDetail = async (id, token, optionalConfig = {}) => {
+  const headers = {
+    ...(axios.defaults.headers || {}),
+    'Content-Type': 'application/json',
+  };
+  if (token) {
+    headers['x-access-token'] = token;
+  }
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'GET',
+      baseURL: apiUrl,
+      url: `${USER_PATH}/${id}`,
+      headers,
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const Api = {
   setDefaults,
   setToken,
@@ -103,6 +144,8 @@ const Api = {
   register,
   getNiceErrorMsg,
   downloadStages,
+  downloadStageDetail,
+  getUserDetail,
 };
 
 export default Api;
