@@ -23,6 +23,7 @@
 }
 
 .card {
+  position: relative;
   background-color: #fff;
   height: 70%;
   max-height: 720px;
@@ -137,6 +138,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  div {
+    text-transform: none;
+  }
+
+  .ribbon-countdown-title {
+    margin-bottom: 5px;
+  }
+
 }
 
 .ribbon-new {

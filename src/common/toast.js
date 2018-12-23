@@ -27,8 +27,9 @@ export const info = (msg) => {
 export const defaultToast = (msg) => {
   toast(msg, {
     position: toast.POSITION.TOP_RIGHT,
+    className: 'toast-dark',
   });
-}
+};
 
 const Toast = {
   success,

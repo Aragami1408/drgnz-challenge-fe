@@ -16,8 +16,10 @@ const AppRoot = () => (
       <AppComponent />
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1750}
         hideProgressBar
+        pauseOnHover
+        bodyClassName="center-toast-body"
       />
     </PersistGate>
   </Provider>
