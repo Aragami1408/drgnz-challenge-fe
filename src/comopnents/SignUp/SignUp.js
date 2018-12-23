@@ -33,6 +33,17 @@ export class SignUp extends PureComponent {
     const hiddenRegCode = [...new Array(randInt(5, 11))].map(() => possible.charAt(randInt(0, possible.length))).join``;
     this.setState({ hiddenRegCode });
     console.log(`Your registration code is: ${hiddenRegCode}`);
+    document.addEventListener('keypress', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress);
+  }
+
+  handleKeyPress = ({ keyCode }) => {
+    if (keyCode === 13) {
+      this.handleLogin();
+    }
   }
 
   validRedCode = (regCode) => {

@@ -19,10 +19,6 @@ export const initialState = {
   error: null,
 };
 
-export const getAuth = ({ auth }) => auth.authenticated;
-export const getAuthError = ({ auth }) => auth.error;
-export const getAuthStatus = ({ auth }) => auth.isLoading;
-
 // action creators
 const login = (username, password) => ({
   type: LOGIN_START,
@@ -161,3 +157,6 @@ export const hasPreviouslyAuthenticated = state => (
 );
 export const getUsername = state => state.auth.username;
 export const getToken = state => state.auth.token;
+export const getAuth = ({ auth }) => auth.authenticated;
+export const getAuthError = ({ auth }) => auth.error;
+export const getAuthStatus = ({ auth }) => auth.isLoading;

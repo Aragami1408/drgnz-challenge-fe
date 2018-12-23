@@ -21,6 +21,17 @@ export class Login extends PureComponent {
 
   componentDidMount() {
     document.title = 'Login - Drgnz Challenge 2018';
+    document.addEventListener('keypress', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress);
+  }
+
+  handleKeyPress = ({ keyCode }) => {
+    if (keyCode === 13) {
+      this.handleLogin();
+    }
   }
 
   handleLogin = () => {

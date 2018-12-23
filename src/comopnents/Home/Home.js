@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import Card from '../Card';
-import Header from '../Header';
+import Header from '../../containers/Header';
 import PrevArrow from './PrevArrow';
 import NextArrow from './NextArrow';
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import  {
+import {
   actions, getAuthStatus, getAuthError,
 } from '../../reducers/auth';
 import SignUp from '../../comopnents/SignUp';

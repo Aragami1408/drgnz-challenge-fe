@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
-export const DropdownMenu = () => (
+export const DropdownMenu = ({ logout }) => (
   <div id="dropdown">
     <Link to="/" className="dropdown-item">
       <span>Home</span>
@@ -16,11 +17,15 @@ export const DropdownMenu = () => (
       <span>Help</span>
       <FontAwesomeIcon icon="question-circle" />
     </Link>
-    <div className="dropdown-item">
+    <div className="dropdown-item" onClick={logout}>
       <span>Logout</span>
       <FontAwesomeIcon icon="sign-out-alt" />
     </div>
   </div>
 );
+
+DropdownMenu.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
 
 export default DropdownMenu;
