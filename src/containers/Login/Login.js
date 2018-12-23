@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import  { actions, getAuthStatus, getAuthError } from '../../reducers/auth';
+import {
+  actions, getAuthStatus, getAuthError,
+} from '../../reducers/auth';
 import Login from '../../comopnents/Login';
 
 const mapStateToProps = state => ({

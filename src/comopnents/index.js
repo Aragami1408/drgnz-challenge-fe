@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AppComponent from '../containers/AppContainer';
+import AppComponent from '../containers/App';
 
 
 import configureStore from '../store';
