@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { TRANSACTION_CLEAR } from './transaction';
 
 export const LOGIN_START = 'auth/LOGIN_START';
 export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
@@ -6,6 +7,8 @@ export const LOGIN_FAILED = 'auth/LOGIN_FAILED';
 export const SIGNUP_START = 'auth/SIGNUP_START';
 export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
 export const SIGNUP_FAILED = 'auth/SIGNUP_FAILED';
+export const AUTH_CLEAR = 'auth/AUTH_CLEAR';
+export const LOGOUT = 'auth/LOGOUT';
 
 export const initialState = {
   username: null,
@@ -69,6 +72,11 @@ const registerSuccess = (username, token) => ({
   },
 });
 
+// ============ misc
+const logout = () => ({
+  type: LOGOUT,
+});
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_START: {
@@ -122,6 +130,16 @@ export default function reducer(state = initialState, action) {
         error: null,
       };
     }
+    case TRANSACTION_CLEAR: {
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+      };
+    }
+    case LOGOUT: {
+      return initialState;
+    }
     default: return state;
   }
 }
@@ -133,6 +151,7 @@ export const actions = {
   register,
   registerFailed,
   registerSuccess,
+  logout,
 };
 
 // Selectors

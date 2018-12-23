@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { getAuth } from '../../reducers/auth';
 import {
   getError, getStageList,
-  getStatus, actions,
+  getStatus, actions as StagesActions,
 } from '../../reducers/stages';
+import { clearTransaction } from '../../reducers/transaction';
 import App from '../../comopnents/App';
 
 const mapStateToProps = state => ({
@@ -15,7 +16,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getStages: bindActionCreators(actions.getStages, dispatch),
+  getStages: bindActionCreators(StagesActions.getStages, dispatch),
+  clearTransaction: bindActionCreators(clearTransaction, dispatch),
   dispatch,
 });
 

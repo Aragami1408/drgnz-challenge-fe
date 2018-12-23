@@ -1,3 +1,5 @@
+import { TRANSACTION_CLEAR } from './transaction';
+
 export const GET_STAGES_START = 'stages/GET_STAGES_START';
 export const GET_STAGES_SUCCESS = 'stages/GET_STAGES_SUCCESS';
 export const GET_STAGES_FAILED = 'stages/GET_STAGES_FAILED';
@@ -108,6 +110,13 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         currentStage: stage || state.currentStage,
+      };
+    }
+    case TRANSACTION_CLEAR: {
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
       };
     }
     default:

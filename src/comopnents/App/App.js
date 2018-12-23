@@ -43,6 +43,7 @@ class App extends Component {
     IAmDrgnz: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
     getStages: PropTypes.func.isRequired,
+    clearTransaction: PropTypes.func.isRequired,
     authenticated: PropTypes.bool,
     requiresDownload: PropTypes.bool,
     isDownloadingStage: PropTypes.bool,
@@ -57,6 +58,11 @@ class App extends Component {
     stageErrorMsg: '',
   }
 
+  componentDidMount() {
+    const { clearTransaction } = this.props;
+    clearTransaction();
+  }
+
   componentDidUpdate = () => {
     const {
       getStages, authenticated, isDownloadingStage,
@@ -65,7 +71,7 @@ class App extends Component {
     if (stageErrorMsg || isDownloadingStage) return;
     if (authenticated && requiresDownload) {
       getStages();
-      console.log('Download nef');
+      console.log('Downloading stages');
     }
   }
 
