@@ -8,10 +8,10 @@ import Toast from '../common/toast';
 import {
   LOGIN_START,
   SIGNUP_START,
-  VALIDATE_TOKEN,
   actions as authAction,
   getToken,
 } from '../reducers/auth';
+import { REHYDRATION_COMPLETE } from '../reducers';
 
 export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
   while (true) {
@@ -44,7 +44,7 @@ export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
 
 export function* validateToken() { // eslint-disable-line no-underscore-dangle
   while (true) {
-    yield take(VALIDATE_TOKEN);
+    yield take(REHYDRATION_COMPLETE);
     try {
       const token = yield select(getToken);
       const { id } = decode(token) || {};

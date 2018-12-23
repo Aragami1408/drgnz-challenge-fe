@@ -49,6 +49,7 @@ class App extends Component {
     authenticated: PropTypes.bool,
     requiresDownload: PropTypes.bool,
     isDownloadingStage: PropTypes.bool,
+    isLoading: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -125,9 +126,11 @@ class App extends Component {
   render() {
     const {
       requiresDownload, isDownloadingStage,
-      stageErrorMsg,
+      stageErrorMsg, isLoading, authenticated,
     } = this.props;
 
+    if (!authenticated) return this.render();
+    if (isLoading) return this.renderLoading();
     if (requiresDownload && stageErrorMsg) return this.renderError(stageErrorMsg);
     if (requiresDownload && isDownloadingStage) return this.renderLoading();
     return this.renderRouter();

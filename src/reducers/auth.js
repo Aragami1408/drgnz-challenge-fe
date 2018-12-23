@@ -9,7 +9,7 @@ export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
 export const SIGNUP_FAILED = 'auth/SIGNUP_FAILED';
 export const AUTH_CLEAR = 'auth/AUTH_CLEAR';
 export const LOGOUT = 'auth/LOGOUT';
-export const VALIDATE_TOKEN = 'auth/VALIDATE_TOKEN';
+export const VALIDATE_TOKEN_SUCCESS = 'auth/VALIDATE_TOKEN_SUCCESS';
 
 export const initialState = {
   username: null,
@@ -74,10 +74,6 @@ const logout = () => ({
   type: LOGOUT,
 });
 
-const validateToken = () => ({
-  type: VALIDATE_TOKEN,
-});
-
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_START: {
@@ -131,12 +127,6 @@ export default function reducer(state = initialState, action) {
         error: null,
       };
     }
-    case VALIDATE_TOKEN: {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    }
     case TRANSACTION_CLEAR: {
       return {
         ...state,
@@ -159,14 +149,9 @@ export const actions = {
   registerFailed,
   registerSuccess,
   logout,
-  validateToken,
 };
 
 // Selectors
-export const isAuthenticated = state => state.auth.authenticated;
-export const hasPreviouslyAuthenticated = state => (
-  state.auth.username !== null && state.auth.token !== null
-);
 export const getUsername = state => state.auth.username;
 export const getToken = state => state.auth.token;
 export const getAuth = ({ auth }) => auth.authenticated;

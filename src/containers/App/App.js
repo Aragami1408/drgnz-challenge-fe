@@ -8,6 +8,7 @@ import {
   getStatus, actions as StagesActions,
 } from '../../reducers/stages';
 import { clearTransaction } from '../../reducers/transaction';
+import { getSystemLoadingStatus } from '../../reducers/system';
 import App from '../../comopnents/App';
 
 const mapStateToProps = state => ({
@@ -15,6 +16,7 @@ const mapStateToProps = state => ({
   isDownloadingStage: getStatus(state),
   requiresDownload: (getStageList(state).length === 0),
   stageErrorMsg: getError(state),
+  isLoading: getSystemLoadingStatus(state),
 });
 
 const mapDispatchToProps = dispatch => ({
