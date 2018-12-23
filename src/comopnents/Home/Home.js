@@ -46,7 +46,6 @@ const settings = {
 export class Home extends PureComponent {
   static propTypes = {
     stages: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
-    selectStage: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -58,7 +57,6 @@ export class Home extends PureComponent {
   )
 
   renderHome = (stages) => {
-    const { selectStage } = this.props;
     const stageToShown = stages.filter(stage => !stage.hide);
     const slidesToShow = stageToShown.length;
     settings.slidesToShow = slidesToShow;
@@ -67,13 +65,11 @@ export class Home extends PureComponent {
       <div id="card-container">
         <Slider {...settings}>
           {
-            stageToShown.map((stage, index) => (
+            stageToShown.map(stage => (
               <Card
                 key={stage._id} // eslint-disable-line
                 disabled={!stage.unlocked}
-                index={index}
                 stage={stage}
-                selectStage={selectStage}
               />
             ))
           }

@@ -9,8 +9,6 @@ import HistoryService from '../../common/history';
 export class Card extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
-    index: PropTypes.number.isRequired,
-    selectStage: PropTypes.func.isRequired,
     stage: PropTypes.objectOf(PropTypes.any).isRequired,
   }
 
@@ -80,13 +78,11 @@ export class Card extends Component {
 
   handleStageSelection = () => {
     const {
-      disabled, selectStage,
-      index, stage,
+      disabled, stage,
     } = this.props;
     if (disabled) {
       Toast.defaultToast('Currently unavailable');
     } else {
-      selectStage(index);
       HistoryService.push(`/stage/${stage._id}`); // eslint-disable-line
     }
   }

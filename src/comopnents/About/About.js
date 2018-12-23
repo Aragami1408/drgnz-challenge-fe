@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 
-export class NotFound extends PureComponent {
+export class About extends PureComponent {
   goBack = () => {
     const { history } = this.props;
     history.goBack();
@@ -89,4 +89,4 @@ export class NotFound extends PureComponent {
   }
 }
 
-export default NotFound
+export default About

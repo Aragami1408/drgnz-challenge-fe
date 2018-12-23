@@ -7,20 +7,22 @@ export class Header extends PureComponent {
     username: PropTypes.string,
     fullname: PropTypes.string,
     logout: PropTypes.func.isRequired,
+    title: PropTypes.string,
   }
 
   static defaultProps = {
     fullname: '',
     username: '',
+    title: 'Drgnz Challenge 2018',
   }
 
   render() {
-    const { username, fullname, logout } = this.props;
+    const { username, fullname, logout, title } = this.props;
 
     return (
       <div id="header">
         <div className="header-nav">{' '}</div>
-        <div className="header-title">Drgnz Challenge 2018</div>
+        <div className="header-title">{title}</div>
         <div className="header-user">
           <span>{`Hi there, ${username || fullname || 'Drgnz'}`}</span>
           <DropdownMenu logout={logout} />

@@ -126,7 +126,7 @@ class App extends Component {
 
   render() {
     const { requiresDownload, isDownloadingStage, stageErrorMsg } = this.props;
-    if (stageErrorMsg) return this.renderError(stageErrorMsg);
+    if (requiresDownload && stageErrorMsg) return this.renderError(stageErrorMsg);
     if (requiresDownload && isDownloadingStage) return this.renderLoading();
     return this.renderRouter();
   }

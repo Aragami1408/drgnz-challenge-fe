@@ -14,6 +14,18 @@ export class Login extends PureComponent {
     username: '',
   }
 
+  constructor(props) {
+    super(props);
+
+    const { fullname, username } = props;
+
+    this.state = {
+      fullname,
+      username,
+    };
+  }
+
+
   componentDidMount() {
     document.title = 'Account & Profile - Drgnz Challenge 2018';
   }
@@ -24,7 +36,7 @@ export class Login extends PureComponent {
   }
 
   render() {
-    const { username, fullname } = this.props;
+    const { username, fullname } = this.state;
 
     return (
       <div id="card-wrapper">
@@ -37,11 +49,11 @@ export class Login extends PureComponent {
           <div className="card-input-wrapper">
             <div className="card-input">
               <div className="input-label">Username</div>
-              <input className="input-form" type="text" />
+              <input disabled value={username} className="input-form" type="text" />
             </div>
             <div className="card-input">
               <div className="input-label">Full Name</div>
-              <input className="input-form" type="text" />
+              <input value={fullname} className="input-form" type="text" />
             </div>
             <div className="card-input">
               <div className="input-label">New Password</div>

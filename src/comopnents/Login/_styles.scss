@@ -72,6 +72,10 @@
     border-bottom: 1px solid #999;
     -webkit-font-smoothing: antialiased;
 
+    &:disabled {
+      cursor: not-allowed;
+    }
+
     &.has-error {
       background-image: linear-gradient(to right,#EE7752 0,#E73C7E 100%);
     }

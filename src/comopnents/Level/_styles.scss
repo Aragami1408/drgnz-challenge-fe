@@ -1,24 +1,25 @@
-#empty {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+#level {
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.level-wrapper {
+  width: 100%;
+  height: calc(100% - 50px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-90deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-  .empty-msg {
-    font-size: 72px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    line-height: 100px;
-  }
-
-  .empty-link {
-    font-size: 18px;
-    text-decoration: none;
-  }
+}
+.level {
+  background-color: #fff;
+  width: 50%;
+  height: 80%;
+  box-shadow: 0 3px 10px -5px black;
+  padding: 25px 25px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
