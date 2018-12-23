@@ -11,9 +11,6 @@ import {
 } from '../reducers/auth';
 import { push } from '../common/history';
 
-export function* checkAuthentication() {
-}
-
 export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
   while (true) {
     const { payload } = yield take(LOGIN_START);
@@ -33,11 +30,12 @@ export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
         continue;
       }
       const { data } = response;
+      yield call(Api.setToken, data.token);
       yield put(authAction.loginSuccess(data.token));
       push('/');
       // yield put()
     } catch (error) {
-      yield put(error);
+      yield put(authAction.loginFailed(error));
       console.log(error);
     }
   }
@@ -67,10 +65,11 @@ export function* handleRegistration() {
       Toast.success('Welcome to Drgnz Challenge 2018');
       const { data } = response;
       const { username, token } = data;
+      yield call(Api.setToken, data.token);
       yield put(authAction.registerSuccess(username, token));
       push('/');
     } catch (error) {
-      yield put(error);
+      yield put(authAction.registerFailed(error));
       console.log(error);
     }
   }
@@ -78,7 +77,6 @@ export function* handleRegistration() {
 
 export default function* authFlow() {
   yield all([
-    checkAuthentication(),
     handleUserLogin(),
     handleUserLogout(),
     handleRegistration(),

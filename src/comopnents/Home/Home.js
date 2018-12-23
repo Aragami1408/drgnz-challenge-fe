@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Slider from 'react-slick';
+import PropTypes from 'prop-types';
 import Card from '../Card';
 import Header from '../Header';
 import PrevArrow from './PrevArrow';
@@ -19,66 +20,71 @@ const settings = {
       breakpoint: 1920,
       settings: {
         slidesToShow: 4,
-      }
+      },
     },
     {
       breakpoint: 1600,
       settings: {
         slidesToShow: 3,
-      }
+      },
     },
     {
       breakpoint: 1024,
       settings: {
         slidesToShow: 2,
-      }
+      },
     },
     {
       breakpoint: 720,
       settings: {
         slidesToShow: 1,
-      }
+      },
     },
   ],
 };
 
 export class Home extends PureComponent {
+  static propTypes = {
+    stages: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  }
+
   componentDidMount() {
     document.title = 'Home - Drgnz Challenge 2018';
   }
 
+  renderHeader = () => (
+    <Header />
+  )
+
+  renderHome = (stages) => {
+    const stageToShown = stages.filter(stage => !stage.hide);
+    const slidesToShow = stageToShown.length;
+    settings.slidesToShow = slidesToShow;
+
+    return (
+      <div id="card-container">
+        <Slider {...settings}>
+          {
+            stageToShown.map(stage => (
+              <Card
+                key={stage._id} // eslint-disable-line
+                name={stage.name}
+                disabled={!stage.unlocked}
+                isNew={stage.newStage}
+              />
+            ))
+          }
+        </Slider>
+      </div>
+    );
+  }
+
   render() {
+    const { stages } = this.props;
     return (
       <div id="home">
-        <Header />
-        <div id="card-container">
-          <Slider {...settings}>
-            <Card
-              ref={this.entrance}
-              name="entrance"
-            />
-            <Card
-              ref={this.highland}
-              name="highland"
-              disabled
-            />
-            <Card
-              ref={this.frozen}
-              name="frozen"
-              disabled
-            />
-            <Card
-              ref={this.blade}
-              name="blade"
-              disabled
-            />
-            <Card
-              ref={this.bloodmoon}
-              name="bloodmoon"
-              disabled
-            />
-          </Slider>
-        </div>
+        {this.renderHeader()}
+        {this.renderHome(stages)}
       </div>
     );
   }

@@ -7,10 +7,12 @@ export class Card extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
+    isNew: PropTypes.bool,
   }
 
   static defaultProps = {
     disabled: false,
+    isNew: false,
   }
 
   renderNewState = () => (
@@ -36,7 +38,7 @@ export class Card extends Component {
   }
 
   render() {
-    const { name, disabled } = this.props;
+    const { name, disabled, isNew } = this.props;
     const classList = {
       card: true,
       [`card-${name}`]: true,
@@ -49,6 +51,7 @@ export class Card extends Component {
         onClick={this.handleStageSelection}
       >
         <div className="card-name shine">
+          {isNew && this.renderNewState()}
           <div>the</div>
           <div>{name}</div>
         </div>

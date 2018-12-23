@@ -6,6 +6,7 @@ const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
 // authenticate path
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
+const STAGE_PATH = '/api/stage';
 
 const setDefaults = (defaults) => {
   Object.keys(defaults).forEach((key) => {
@@ -17,7 +18,7 @@ const setToken = (token) => {
   const { headers } = axios.defaults;
   axios.defaults.headers = {
     ...headers,
-    Authorization: `Token ${token}`,
+    'x-access-token': token,
   };
 };
 
@@ -63,12 +64,31 @@ const register = async (formData, optionalConfig = {}) => {
   }
 };
 
+const downloadStages = async (optionalConfig = {}) => {
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'GET',
+      baseURL: apiUrl,
+      url: STAGE_PATH,
+      headers: {
+        ...(axios.defaults.headers || {}),
+        'Content-Type': 'application/json',
+      },
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const getNiceErrorMsg = (response) => {
   const { status, data } = response;
 
   if (status >= 500) {
     return 'Server is unreachable';
   }
+  if (status === 401) return 'Unauthorized';
   if (status >= 400) {
     if (data.message) return data.message;
     if (!data.token) return 'Wrong password';
@@ -82,6 +102,7 @@ const Api = {
   login,
   register,
   getNiceErrorMsg,
+  downloadStages,
 };
 
 export default Api;

@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const NotFound = () => (
-  <div id="not-found">
-    <div className="not-found-msg">
+  <div id="empty">
+    <div className="empty-msg">
       Oops! Wrong Way
     </div>
-    <Link to="/" className="not-found-link">
+    <Link to="/" className="empty-link">
       Return challenge
     </Link>
   </div>

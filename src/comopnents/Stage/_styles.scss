@@ -1,4 +1,4 @@
-#not-found {
+#empty {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -10,14 +10,14 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 
-  .not-found-msg {
+  .empty-msg {
     font-size: 72px;
     font-weight: bold;
     margin-bottom: 15px;
     line-height: 100px;
   }
 
-  .not-found-link {
+  .empty-link {
     font-size: 18px;
     text-decoration: none;
   }
