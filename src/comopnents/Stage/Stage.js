@@ -29,7 +29,7 @@ export class Stage extends Component {
     const { stage } = this.props;
     const { levelList = [] } = stage;
     return (
-      <div id="stage">
+      <div id="stage" className="stage-entrance">
         <Header title={`The ${stage.name}`} />
         <div className="stage-wrapper">
           <div className="stage">

@@ -16,10 +16,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background:rgba(255, 255, 255, 0.8);
   width: 100%;
+  // box-shadow: inset 0px 0px 0px 2px #189577;
+  // box-sizing: border-box;
   box-shadow: 0px 1px 3px 1px #189577;
-  position: relative;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
 
   .header-title {
     text-transform: uppercase;
