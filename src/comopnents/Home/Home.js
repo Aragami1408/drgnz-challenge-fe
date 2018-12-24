@@ -49,7 +49,7 @@ export class Home extends PureComponent {
   }
 
   componentDidMount() {
-    document.title = 'Home - Drgnz Challenge 2018';
+    document.title = 'Home - Drgnz Challenge';
   }
 
   renderHeader = () => (

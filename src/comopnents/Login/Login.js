@@ -20,7 +20,7 @@ export class Login extends PureComponent {
   }
 
   componentDidMount() {
-    document.title = 'Login - Drgnz Challenge 2018';
+    document.title = 'Login - Drgnz Challenge';
     document.addEventListener('keypress', this.handleKeyPress);
   }
 

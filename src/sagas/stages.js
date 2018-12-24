@@ -55,7 +55,6 @@ export function* handleDownloadingStageDetail() {
         continue;
       }
       const { data } = response;
-      console.log(data);
       yield put(stageAction.downloadStageDetailSuccess(data));
     } catch (error) {
       yield put(stageAction.downloadStageDetailFailed(error));

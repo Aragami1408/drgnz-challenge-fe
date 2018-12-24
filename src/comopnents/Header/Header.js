@@ -13,11 +13,14 @@ export class Header extends PureComponent {
   static defaultProps = {
     fullname: '',
     username: '',
-    title: 'Drgnz Challenge 2018',
+    title: 'Drgnz Challenge',
   }
 
   render() {
-    const { username, fullname, logout, title } = this.props;
+    const {
+      username, fullname,
+      logout, title,
+    } = this.props;
 
     return (
       <div id="header">

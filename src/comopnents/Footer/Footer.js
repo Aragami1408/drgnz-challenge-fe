@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Footer = () => (
   <div id="footer">
-    <Link to="about">
+    <Link to="/about">
       From
       <span>Drgnz</span>
       with

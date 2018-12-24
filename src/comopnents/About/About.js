@@ -15,10 +15,10 @@ export class About extends PureComponent {
           <div id="title">FAQ</div>
           <div id="faq">
             <div className="header">
-              What is Drgnz Challenge 2018?
+              What is Drgnz Challenge?
             </div>
             <div className="content">
-              Drgnz Challenge 2018 is a CTF game for DNH community.
+              Drgnz Challenge is a CTF game for DNH community.
             </div>
             <div className="header">
               What is this game about?

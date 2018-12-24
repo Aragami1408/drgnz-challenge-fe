@@ -27,7 +27,7 @@ export class Login extends PureComponent {
 
 
   componentDidMount() {
-    document.title = 'Account & Profile - Drgnz Challenge 2018';
+    document.title = 'Account & Profile - Drgnz Challenge';
   }
 
   goBack = () => {

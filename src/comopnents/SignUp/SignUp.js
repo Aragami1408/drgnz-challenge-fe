@@ -28,7 +28,7 @@ export class SignUp extends PureComponent {
   }
 
   componentDidMount() {
-    document.title = 'Sign Up - Drgnz Challenge 2018';
+    document.title = 'Sign Up - Drgnz Challenge';
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const hiddenRegCode = [...new Array(randInt(5, 11))].map(() => possible.charAt(randInt(0, possible.length))).join``;
     this.setState({ hiddenRegCode });

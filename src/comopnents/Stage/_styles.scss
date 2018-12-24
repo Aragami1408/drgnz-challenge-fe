@@ -13,11 +13,28 @@
 }
 .stage {
   background-color: #fff;
-  width: 50%;
+  width: 45%;
   height: 80%;
   box-shadow: 0 3px 10px -5px black;
   padding: 25px 25px;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stage-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #333;
+  cursor: default;
+}
+
+.stage-level {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

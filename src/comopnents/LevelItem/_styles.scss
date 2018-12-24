@@ -1,0 +1,55 @@
+.level-item {
+  background-color: #fff;
+  width: 85%;
+  height: auto;
+  box-shadow: 0 3px 10px -5px black;
+  padding: 10px 5px;
+  padding-bottom: 5px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-left: 3px solid #777;
+  overflow: hidden;
+  border-radius: 5px;
+  transition: .5s ease;
+  transition-delay: .1s;
+  margin-bottom: 25px;
+
+  cursor: pointer;
+
+  &:hover {
+    border-left-width: 6px;
+  }
+}
+
+.level-entrance.solved {
+  border-left: 3px solid #23D5AB;
+  &:hover {
+    border-left-width: 6px;
+  }
+}
+
+.level-highland.solved {
+  border-left: 3px solid #23d552;
+  &:hover {
+    border-left-width: 6px;
+  }
+}
+
+.level-item-tags {
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.level-item-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 7px;
+}

@@ -89,7 +89,7 @@ export function* handleRegistration() {
         yield put(authAction.registerFailed(Api.getNiceErrorMsg(error.response)));
         continue;
       }
-      Toast.success('Welcome to Drgnz Challenge 2018');
+      Toast.success('Welcome to Drgnz Challenge');
       const { data } = response;
       const { username, token } = data;
       yield call(Api.setToken, data.token);
