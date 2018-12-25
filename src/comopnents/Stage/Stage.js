@@ -8,7 +8,11 @@ export class Stage extends Component {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     downloadStageDetail: PropTypes.func.isRequired,
-    stage: PropTypes.objectOf(PropTypes.any).isRequired,
+    stage: PropTypes.objectOf(PropTypes.any),
+  }
+
+  static defaultProps = {
+    stage: {},
   }
 
   componentDidMount() {
@@ -25,9 +29,17 @@ export class Stage extends Component {
     history.push(`/level/${id}`);
   }
 
+  renderLoading = () => (
+    <div className="loading">
+      <div className="app-loader" />
+      <div>Loading</div>
+    </div>
+  )
+
   render() {
     const { stage } = this.props;
-    const { levelList = [] } = stage;
+    const { levelList = [] } = stage || {};
+    if (!stage) return this.renderLoading();
     return (
       <div id="stage" className="stage-entrance">
         <Header title={`The ${stage.name}`} />
