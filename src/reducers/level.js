@@ -37,6 +37,22 @@ export default function reducer(state = initialState, action) {
         isLoading: true,
       };
     }
+    case GET_LEVEL_DETAIL_SUCCESS: {
+      const { level } = action.payload;
+      return {
+        ...state,
+        currentLevel: level,
+        isLoading: false,
+      };
+    }
+    case GET_LEVEL_DETAIL_FAILED: {
+      const { error } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        error,
+      };
+    }
     default:
       return state;
   }

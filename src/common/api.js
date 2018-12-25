@@ -7,6 +7,7 @@ const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
 const STAGE_PATH = '/api/stage';
+const LEVEL_PATH = '/api/level';
 const USER_PATH = '/api/user';
 
 const setDefaults = (defaults) => {
@@ -101,6 +102,24 @@ const downloadStageDetail = async (id, optionalConfig = {}) => {
   }
 };
 
+const downloadLevelDetail = async (id, optionalConfig = {}) => {
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'GET',
+      baseURL: apiUrl,
+      url: `${LEVEL_PATH}/${id}`,
+      headers: {
+        ...(axios.defaults.headers || {}),
+        'Content-Type': 'application/json',
+      },
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const getNiceErrorMsg = (response) => {
   const { status, data } = response;
 
@@ -145,6 +164,7 @@ const Api = {
   getNiceErrorMsg,
   downloadStages,
   downloadStageDetail,
+  downloadLevelDetail,
   getUserDetail,
 };
 
