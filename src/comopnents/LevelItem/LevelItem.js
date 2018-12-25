@@ -7,11 +7,11 @@ const levelName = ['noob', 'easy', 'normal', 'hard', 'challenge'];
 
 const LevelItem = ({
   onClick, name, difficulty,
-  solved, stageName, tags
+  solved, stageName, tags,
 }) => {
   const classList = {
     'level-item': true,
-    [`level-${stageName}`]: true,
+    [`level-item-${stageName}`]: true,
     solved,
   };
   const levelClass = keys(classList).filter(e => classList[e]).join` `;
@@ -36,7 +36,7 @@ const LevelItem = ({
         }
       </div>
     </div>
-  )
+  );
 };
 
 LevelItem.propTypes = {

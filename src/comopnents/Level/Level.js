@@ -5,6 +5,7 @@ import Header from '../../containers/Header';
 export class Level extends Component {
   static propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    level: PropTypes.objectOf(PropTypes.any).isRequired,
   }
 
   componentDidMount() {
@@ -14,12 +15,21 @@ export class Level extends Component {
   }
 
   render() {
+    const { level = {} } = this.props;
     return (
-      <div id="level">
+      <div id="level" className="level-entrance">
         <Header />
         <div className="level-wrapper">
           <div className="level">
-            Hello world
+            <div className="level-title">
+              {level.name || 'Sample'}
+            </div>
+            <div className="level-section-selector">
+              {level.name || 'Sample'}
+            </div>
+            <div id="level-section">
+              {level.name || 'Sample'}
+            </div>
           </div>
         </div>
       </div>

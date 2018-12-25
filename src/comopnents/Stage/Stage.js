@@ -41,7 +41,7 @@ export class Stage extends Component {
     const { levelList = [] } = stage || {};
     if (!stage) return this.renderLoading();
     return (
-      <div id="stage" className="stage-entrance">
+      <div id="stage" className={`stage-${stage.name}`}>
         <Header title={`The ${stage.name}`} />
         <div className="stage-wrapper">
           <div className="stage">
