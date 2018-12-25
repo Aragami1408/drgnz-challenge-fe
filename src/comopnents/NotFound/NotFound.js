@@ -6,7 +6,7 @@ export const NotFound = () => (
     <div className="empty-msg">
       Oops! Wrong Way
     </div>
-    <Link to="/" className="empty-link">
+    <Link to="/" className="empty-link" tabIndex="-1">
       Return challenge
     </Link>
   </div>

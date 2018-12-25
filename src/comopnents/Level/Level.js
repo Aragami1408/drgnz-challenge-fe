@@ -21,6 +21,7 @@ export class Level extends Component {
     level: {},
   }
 
+
   state = {
     stageName: '',
     tab: 'description',
@@ -31,14 +32,35 @@ export class Level extends Component {
     processingInstructions: [/* ... */],
   })
 
+  constructor(props) {
+    super(props);
+
+    this.flagInput = React.createRef();
+  }
+
+
   componentDidMount() {
     const {
       match,
       downloadLevelDetail,
+      level,
     } = this.props;
     const { params } = match;
+    const { tab } = this.state;
+
     downloadLevelDetail(params.id);
+    ReactDOM.render(
+      <ReactMarkdown
+        source={level[tab] || `There is no ${tab} for this problem.`}
+        escapeHtml={false}
+        astPlugins={[this.parseHtml]}
+        renderers={{ code: CodeBlock }}
+      />,
+      document.getElementById('level-section'),
+    );
   }
+
+  toCapitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
   componentDidUpdate = (prevProps, prevState) => {
     const { level = {}, stageList } = this.props;
@@ -65,9 +87,10 @@ export class Level extends Component {
       );
     }
 
-    document.title = (level.name || 'Drgnz Challenge');
     if (level.stageId) {
       const stage = stageList.find(sta => sta._id === level.stageId) // eslint-disable-line
+
+      document.title = level.name ? `${level.name} - The ${this.toCapitalize(stage.name)}` : 'Drgnz Challenge';
       if (stage.name !== stageName || !stageName) {
         this.setState({
           stageName: stage.name,
@@ -85,7 +108,10 @@ export class Level extends Component {
 
     return (
       <div id="level" className={`level-${stageName}`}>
-        <Header />
+        <Header
+          title={`The ${stageName}`}
+          location={`/stage/${level.stageId}`}
+        />
         <div className="level-wrapper">
           <div className="level">
             <div className="level-title">
@@ -118,6 +144,20 @@ export class Level extends Component {
               </div>
             </div>
             <div id="level-section" />
+            <div className="level-submission">
+              <input
+                className="level-submission-input"
+                ref={this.flagInput}
+                placeholder="Enter your flag here"
+              />
+              <button
+                className="level-submission-btn"
+                onClick={() => console.log("Hello")}
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>
