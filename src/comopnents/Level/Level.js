@@ -5,19 +5,50 @@ import Header from '../../containers/Header';
 export class Level extends Component {
   static propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
-    level: PropTypes.objectOf(PropTypes.any).isRequired,
+    level: PropTypes.objectOf(PropTypes.any),
+    stageList: PropTypes.arrayOf(PropTypes.any).isRequired,
+    downloadLevelDetail: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    level: {},
+  }
+
+  state = {
+    stageName: '',
   }
 
   componentDidMount() {
-    const { match } = this.props;
+    const {
+      match,
+      downloadLevelDetail,
+    } = this.props;
     const { params } = match;
-    console.log(params.id);
+    downloadLevelDetail(params.id);
+  }
+
+  componentDidUpdate = () => {
+    const { level = {}, stageList } = this.props;
+    const { stageName } = this.state;
+
+    console.log(stageList);
+
+    document.timeline = (level.name || 'Drgnz Challenge');
+    if (level.stageId) {
+      const stage = stageList.find(sta => sta._id === level.stageId) // eslint-disable-line
+      if (stage.name !== stage || !stageName) {
+        this.setState({
+          stageName: stage.name,
+        });
+      }
+    }
   }
 
   render() {
     const { level = {} } = this.props;
+    const { stageName } = this.state;
     return (
-      <div id="level" className="level-entrance">
+      <div id="level" className={`level-${stageName}`}>
         <Header />
         <div className="level-wrapper">
           <div className="level">

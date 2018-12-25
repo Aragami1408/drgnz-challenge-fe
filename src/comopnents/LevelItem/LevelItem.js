@@ -29,7 +29,7 @@ const LevelItem = ({
         </TagItem>
         {
           tags.map(tag => (
-            <TagItem>
+            <TagItem key={tag}>
               {tag}
             </TagItem>
           ))
@@ -44,8 +44,12 @@ LevelItem.propTypes = {
   name: PropTypes.string.isRequired,
   difficulty: PropTypes.number.isRequired,
   stageName: PropTypes.string.isRequired,
-  solved: PropTypes.bool.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  solved: PropTypes.bool,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+LevelItem.defaultProps = {
+  solved: false,
 };
 
 export default LevelItem;

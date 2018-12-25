@@ -6,9 +6,12 @@ import Api from '../common/api';
 import Toast from '../common/toast';
 import {
   GET_STAGES_START,
-  GET_STAGE_DETAIL_START,
-  actions as stageAction,
+  actions as StagesAction,
 } from '../reducers/stages';
+import {
+  GET_STAGE_DETAIL_START,
+  actions as StageAction,
+} from '../reducers/stage';
 
 export function* handleDownloadingStages() {
   yield take(GET_STAGES_START);
@@ -18,19 +21,21 @@ export function* handleDownloadingStages() {
       timeout: call(delay, 15000),
     });
     if (timeout) {
-      yield put(stageAction.getStagesFailed('Unable to connect to server.\nPlease try again later!'));
+      yield put(StagesAction.getStagesFailed('Unable to connect to server.\nPlease try again later!'));
       Toast.error('Unable to connect to server.\nPlease try again later!');
       return;
     }
     const { error, response } = downloadStages;
     if (error) {
-      yield put(stageAction.getStagesFailed(Api.getNiceErrorMsg(error.response)));
+      const errorMsg = Api.getNiceErrorMsg(error.response);
+      yield put(StagesAction.getStagesFailed(errorMsg));
+      Toast.error(errorMsg);
       return;
     }
     const { data } = response;
-    yield put(stageAction.getStagesSuccess(data));
+    yield put(StagesAction.getStagesSuccess(data));
   } catch (error) {
-    yield put(stageAction.getStagesFailed(error));
+    yield put(StagesAction.getStagesFailed(error));
     console.log(error);
   }
 }
@@ -45,19 +50,21 @@ export function* handleDownloadingStageDetail() {
         timeout: call(delay, 15000),
       });
       if (timeout) {
-        yield put(stageAction.downloadStageDetailFailed('Unable to connect to server.\nPlease try again later!'));
+        yield put(StageAction.downloadStageDetailFailed('Unable to connect to server.\nPlease try again later!'));
         Toast.error('Unable to connect to server.\nPlease try again later!');
         continue;
       }
       const { error, response } = downloadStageDetail;
       if (error) {
-        yield put(stageAction.downloadStageDetailFailed(Api.getNiceErrorMsg(error.response)));
+        const errorMsg = Api.getNiceErrorMsg(error.response);
+        yield put(StageAction.downloadStageDetailFailed(errorMsg));
+        Toast.error(errorMsg);
         continue;
       }
       const { data } = response;
-      yield put(stageAction.downloadStageDetailSuccess(data));
+      yield put(StageAction.downloadStageDetailSuccess(data));
     } catch (error) {
-      yield put(stageAction.downloadStageDetailFailed(error));
+      yield put(StageAction.downloadStageDetailFailed(error));
       console.log(error);
     }
   }

@@ -1,6 +1,6 @@
-export const GET_LEVEL_DETAIL_START = 'stages/GET_LEVEL_DETAIL_START';
-export const GET_LEVEL_DETAIL_SUCCESS = 'stages/GET_LEVEL_DETAIL_SUCCESS';
-export const GET_LEVEL_DETAIL_FAILED = 'stages/GET_LEVEL_DETAIL_FAILED';
+export const GET_LEVEL_DETAIL_START = 'level/GET_LEVEL_DETAIL_START';
+export const GET_LEVEL_DETAIL_SUCCESS = 'level/GET_LEVEL_DETAIL_SUCCESS';
+export const GET_LEVEL_DETAIL_FAILED = 'level/GET_LEVEL_DETAIL_FAILED';
 
 const downloadLevelDetail = id => ({
   type: GET_LEVEL_DETAIL_START,
@@ -9,10 +9,10 @@ const downloadLevelDetail = id => ({
   },
 });
 
-const downloadLevelDetailSuccess = stage => ({
+const downloadLevelDetailSuccess = level => ({
   type: GET_LEVEL_DETAIL_SUCCESS,
   payload: {
-    stage,
+    level,
   },
 });
 
@@ -25,12 +25,17 @@ const downloadLevelDetailFailed = error => ({
 
 const initialState = {
   isLoading: true,
+  error: null,
+  currentLevel: {},
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_LEVEL_DETAIL_START: {
-      return state;
+      return {
+        ...state,
+        isLoading: true,
+      };
     }
     default:
       return state;
@@ -43,4 +48,6 @@ export const actions = {
   downloadLevelDetailFailed,
 };
 
-export const getSystemLoadingStatus = ({ system }) => system.isLoading;
+export const getStatus = ({ level }) => level.isLoading;
+export const getLevel = ({ level }) => level.currentLevel;
+export const getError = ({ level }) => level.error;
