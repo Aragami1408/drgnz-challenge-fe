@@ -3,6 +3,9 @@ import {
   getStageList,
 } from '../../reducers/stages';
 import {
+  actions as SubmissionActions,
+} from '../../reducers/submission';
+import {
   getLevel,
   getError,
   getStatus,
@@ -19,6 +22,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   downloadLevelDetail: LevelActions.downloadLevelDetail,
+  submitFlag: SubmissionActions.submitFlag,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Level);

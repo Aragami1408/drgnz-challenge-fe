@@ -9,6 +9,7 @@ const REGISTER_PATH = '/api/auth/register';
 const STAGE_PATH = '/api/stage';
 const LEVEL_PATH = '/api/level';
 const USER_PATH = '/api/user';
+const SUBMISSION_PATH = '/api/submit';
 
 const setDefaults = (defaults) => {
   Object.keys(defaults).forEach((key) => {
@@ -120,6 +121,25 @@ const downloadLevelDetail = async (id, optionalConfig = {}) => {
   }
 };
 
+const submitFlag = async (formData, optionalConfig = {}) => {
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'POST',
+      baseURL: apiUrl,
+      url: SUBMISSION_PATH,
+      headers: {
+        ...(axios.defaults.headers || {}),
+        'Content-Type': 'application/json',
+      },
+      data: formData,
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const getNiceErrorMsg = (response) => {
   const { status, data } = response;
 
@@ -166,6 +186,7 @@ const Api = {
   downloadStageDetail,
   downloadLevelDetail,
   getUserDetail,
+  submitFlag,
 };
 
 export default Api;

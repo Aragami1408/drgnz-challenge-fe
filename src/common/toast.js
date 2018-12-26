@@ -31,11 +31,26 @@ export const defaultToast = (msg) => {
   });
 };
 
+export const failed = (msg) => {
+  toast.error(msg, {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
+};
+
+export const accepted = (msg) => {
+  toast.success(msg, {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
+};
+
+
 const Toast = {
   success,
   warning,
   error,
   info,
+  failed,
+  accepted,
   defaultToast,
 };
 

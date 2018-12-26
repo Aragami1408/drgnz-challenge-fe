@@ -8,6 +8,11 @@ import {
   GET_LEVEL_DETAIL_START,
   actions as LevelAction,
 } from '../reducers/level';
+import {
+  SUBMISSION_START,
+  actions as SubmissionActions,
+} from '../reducers/submission';
+import HistoryService from '../common/history';
 
 export function* handleDownloadingLevelDetail() {
   while (true) {
@@ -40,8 +45,49 @@ export function* handleDownloadingLevelDetail() {
   }
 }
 
+export function* handleSubmission() {
+  while (true) {
+    const { payload } = yield take(SUBMISSION_START);
+    try {
+      const { flag, levelId } = payload;
+      const { submitFlag, timeout } = yield race({
+        submitFlag: call(Api.submitFlag, {
+          levelId,
+          flag,
+        }),
+        timeout: call(delay, 15000),
+      });
+      if (timeout) {
+        yield put(SubmissionActions.submitFlagFailed('Unable to connect to server.\nPlease try again later!'));
+        Toast.error('Unable to connect to server.\nPlease try again later!');
+        continue;
+      }
+      const { error, response } = submitFlag;
+      if (error) {
+        const errorMsg = Api.getNiceErrorMsg(error.response);
+        yield put(SubmissionActions.submitFlagFailed(errorMsg));
+        Toast.error(errorMsg);
+        continue;
+      }
+      const { data } = response;
+      if (data.correct) {
+        yield put(SubmissionActions.submitFlagSuccess());
+        Toast.accepted('Correct!');
+        HistoryService.goBack();
+      } else {
+        yield put(SubmissionActions.submitFlagFailed());
+        Toast.failed('Wrong flag!');
+      }
+    } catch (error) {
+      yield put(SubmissionActions.submitFlagFailed(error));
+      console.log(error);
+    }
+  }
+}
+
 export default function* authFlow() {
   yield all([
     handleDownloadingLevelDetail(),
+    handleSubmission(),
   ]);
 }

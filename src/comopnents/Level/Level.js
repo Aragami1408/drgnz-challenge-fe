@@ -15,6 +15,7 @@ export class Level extends Component {
     level: PropTypes.objectOf(PropTypes.any),
     stageList: PropTypes.arrayOf(PropTypes.any).isRequired,
     downloadLevelDetail: PropTypes.func.isRequired,
+    submitFlag: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -101,6 +102,12 @@ export class Level extends Component {
 
   handleTabChange = tab => this.setState({ tab });
 
+  handleSubmitBtnClick = () => {
+    const { submitFlag, level } = this.props;
+    const flag = this.flagInput.current.value || '';
+    submitFlag(flag, level._id); // eslint-disable-line
+  }
+
   render() {
     const { level = {} } = this.props;
     const { stageName, tab } = this.state;
@@ -152,7 +159,7 @@ export class Level extends Component {
               />
               <button
                 className="level-submission-btn"
-                onClick={() => console.log("Hello")}
+                onClick={this.handleSubmitBtnClick}
                 type="submit"
               >
                 Submit

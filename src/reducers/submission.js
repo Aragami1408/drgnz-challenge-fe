@@ -2,18 +2,16 @@ export const SUBMISSION_START = 'submission/SUBMISSION_START';
 export const SUBMISSION_SUCCESS = 'submission/SUBMISSION_SUCCESS';
 export const SUBMISSION_FAILED = 'submission/SUBMISSION_FAILED';
 
-const submitFlag = id => ({
+const submitFlag = (flag, levelId) => ({
   type: SUBMISSION_START,
   payload: {
-    id,
+    flag,
+    levelId,
   },
 });
 
-const submitFlagSuccess = submission => ({
+const submitFlagSuccess = () => ({
   type: SUBMISSION_SUCCESS,
-  payload: {
-    submission,
-  },
 });
 
 const submitFlagFailed = error => ({
@@ -38,7 +36,7 @@ export default function reducer(state = initialState, action) {
     }
     case SUBMISSION_SUCCESS:
     case SUBMISSION_FAILED: {
-      const { error } = action.payload;
+      const { error } = action.payload || {};
       return {
         ...state,
         isLoading: false,
