@@ -19,6 +19,14 @@
     justify-content: space-between;
     align-items: center;
 
+    @media (max-width: 1200px) {
+      width: 65%;
+    }
+
+    @media (max-width: 720px) {
+      width: 80%;
+    }
+
     #title {
       margin-bottom: 25px;
       font-size: 36px;

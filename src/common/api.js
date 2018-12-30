@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // const apiUrl = 'https://drgnz-challenge-zkuefmyjwn.now.sh';
-// const apiUrl = 'http://localhost:3001';
-const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
+const apiUrl = 'http://localhost:3001';
+// const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
 // authenticate path
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
@@ -141,7 +141,9 @@ const submitFlag = async (formData, optionalConfig = {}) => {
 };
 
 const getNiceErrorMsg = (response) => {
-  const { status, data } = response;
+  const { status, data } = response || {};
+
+  if (!status) return 'Unknown error occurred!';
 
   if (status >= 500) {
     return 'Server is unreachable';

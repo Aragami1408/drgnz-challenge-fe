@@ -70,7 +70,7 @@ export function* handleSubmission() {
       }
       const { data } = response;
       if (data.correct) {
-        yield put(SubmissionActions.submitFlagSuccess());
+        yield put(SubmissionActions.submitFlagSuccess(data.level));
         Toast.accepted('Correct!');
         yield delay(1000);
         HistoryService.goBack();

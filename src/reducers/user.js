@@ -99,11 +99,16 @@ export default function reducer(state = initialState, action) {
       const { level } = action.payload || {};
       if (!level) return state;
       if (!state.user) return state;
+      const newLevelList = state.user.levels.map((localLevel) => {
+        if (localLevel.levelId === level.levelId) return level;
+        return localLevel;
+      });
+      if (!newLevelList.length) newLevelList.push(level);
       return {
         ...state,
         user: {
           ...state.user,
-          levels: [...state.user.levels, level],
+          levels: newLevelList,
         },
       };
     }

@@ -37,6 +37,7 @@ export class Stage extends Component {
     const { user } = this.props;
     const { levels } = user;
     const currentLevel = levels.find(lev => lev.levelId === level._id) // eslint-disable-line
+
     return !!(currentLevel || {}).finishedAt;
   }
 

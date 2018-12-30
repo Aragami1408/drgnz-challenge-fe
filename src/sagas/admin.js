@@ -34,7 +34,6 @@ export function* handleSubmitNewLevel() { // eslint-disable-line no-underscore-d
         continue;
       }
       const { data } = response;
-      console.log(data);
       yield put(AdminActions.submitLevellSuccess());
       Toast.success('New level has been added!');
       // yield put()
