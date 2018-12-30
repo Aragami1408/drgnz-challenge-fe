@@ -68,11 +68,11 @@ export function* validateToken() { // eslint-disable-line no-underscore-dangle
         return;
       }
       const { data } = response;
-      console.log('hahaha', data);
       yield put(UserActions.downloadUserInfoSuccess(data));
       yield call(Api.setToken, data.token);
       yield put(AuthActions.loginSuccess(data.token));
     } catch (error) {
+      yield put(AuthActions.loginFailed(error.message));
       console.log(error);
     }
   }

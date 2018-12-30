@@ -21,7 +21,7 @@ import Level from '../../containers/Level';
 import Footer from '../Footer';
 import NotFound from '../NotFound';
 import About from '../About';
-import Account from '../Account';
+import Account from '../../containers/Account';
 import AddLevel from '../AddLevel';
 import Stage from '../../containers/Stage';
 import Ranking from '../Ranking';
@@ -128,8 +128,6 @@ class App extends Component {
       requiresDownload, isDownloadingStage,
       stageErrorMsg, isLoading, authenticated, IAmDrgnz,
     } = this.props;
-
-    console.log(IAmDrgnz);
 
     if (!authenticated) return this.renderRouter();
     if (isLoading) return this.renderLoading();

@@ -2,6 +2,7 @@ import {
   VALIDATE_TOKEN_SUCCESS,
   LOGIN_SUCCESS,
   SIGNUP_SUCCESS,
+  LOGIN_FAILED,
 } from './auth';
 
 const initialState = {
@@ -12,6 +13,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case VALIDATE_TOKEN_SUCCESS:
     case SIGNUP_SUCCESS:
+    case LOGIN_FAILED:
     case LOGIN_SUCCESS: {
       return {
         isLoading: false,

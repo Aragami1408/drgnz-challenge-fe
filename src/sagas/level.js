@@ -36,7 +36,6 @@ export function* handleDownloadingLevelDetail() {
         continue;
       }
       const { data } = response;
-      console.log(data);
       yield put(LevelAction.downloadLevelDetailSuccess(data));
     } catch (error) {
       yield put(LevelAction.downloadLevelDetailFailed(error));

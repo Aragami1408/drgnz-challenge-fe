@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // const apiUrl = 'https://drgnz-challenge-zkuefmyjwn.now.sh';
-// const apiUrl = 'http://localhost:3001';
-const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
+const apiUrl = 'http://localhost:3001';
+// const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
 // authenticate path
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';
@@ -176,6 +176,27 @@ const getUserDetail = async (id, token, optionalConfig = {}) => {
   }
 };
 
+const updateUserInformation = async (id, user, optionalConfig = {}) => {
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'PUT',
+      baseURL: apiUrl,
+      url: `${USER_PATH}/${id}`,
+      headers: {
+        ...(axios.defaults.headers || {}),
+        'Content-Type': 'application/json',
+      },
+      data: {
+        ...user,
+      },
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const Api = {
   setDefaults,
   setToken,
@@ -187,6 +208,7 @@ const Api = {
   downloadLevelDetail,
   getUserDetail,
   submitFlag,
+  updateUserInformation,
 };
 
 export default Api;
