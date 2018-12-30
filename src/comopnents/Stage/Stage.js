@@ -21,11 +21,10 @@ export class Stage extends Component {
 
   componentDidMount() {
     const {
-      match, downloadStageDetail,
+      match, downloadStageDetail, stage,
     } = this.props;
     const { params } = match;
-
-    downloadStageDetail(params.id);
+    if (!stage || isEmpty(stage)) downloadStageDetail(params.id);
   }
 
   handleClick = (id) => {

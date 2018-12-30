@@ -3,6 +3,7 @@ import {
   getStageList,
 } from '../../reducers/stages';
 import {
+  getStatus as getSubmissionStatus,
   actions as SubmissionActions,
 } from '../../reducers/submission';
 import {
@@ -17,6 +18,7 @@ const mapStateToProps = state => ({
   stageList: getStageList(state),
   level: getLevel(state),
   isLoading: getStatus(state),
+  isSubmitting: getSubmissionStatus(state),
   errorMsg: getError(state),
 });
 

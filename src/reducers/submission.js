@@ -10,8 +10,11 @@ const submitFlag = (flag, levelId) => ({
   },
 });
 
-const submitFlagSuccess = () => ({
+const submitFlagSuccess = level => ({
   type: SUBMISSION_SUCCESS,
+  payload: {
+    level,
+  },
 });
 
 const submitFlagFailed = error => ({

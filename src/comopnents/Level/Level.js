@@ -19,11 +19,13 @@ export class Level extends Component {
     downloadLevelDetail: PropTypes.func.isRequired,
     submitFlag: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
+    isSubmitting: PropTypes.bool,
   }
 
   static defaultProps = {
     level: {},
     isLoading: false,
+    isSubmitting: false,
   }
 
 
@@ -53,7 +55,7 @@ export class Level extends Component {
     } = this.props;
     const { params } = match;
     const { tab } = this.state;
-    downloadLevelDetail(params.id);
+    if (!level || isEmpty(level)) downloadLevelDetail(params.id);
     if (isLoading) return;
     ReactDOM.render(
       <ReactMarkdown
@@ -64,14 +66,30 @@ export class Level extends Component {
       />,
       document.getElementById('level-section'),
     );
+    this.handleStageName();
   }
 
   toCapitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
-  componentDidUpdate = (prevProps, prevState) => {
+  handleStageName = () => {
     const { level = {}, stageList } = this.props;
+    const { stageName } = this.state;
+    if (level.stageId) {
+      const stage = stageList.find(sta => sta._id === level.stageId) // eslint-disable-line
+
+      document.title = level.name ? `${level.name} - The ${this.toCapitalize(stage.name)}` : 'Drgnz Challenge';
+      if (stage.name !== stageName || !stageName) {
+        this.setState({
+          stageName: stage.name,
+        });
+      }
+    }
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    const { level = {} } = this.props;
     const { level: prevLevel } = prevProps;
-    const { stageName, tab } = this.state;
+    const { tab } = this.state;
     const { tab: prevTab } = prevState;
     let shouldRenderMarkdown = tab !== prevTab;
     if (tab === 'description') {
@@ -93,16 +111,7 @@ export class Level extends Component {
       );
     }
 
-    if (level.stageId) {
-      const stage = stageList.find(sta => sta._id === level.stageId) // eslint-disable-line
-
-      document.title = level.name ? `${level.name} - The ${this.toCapitalize(stage.name)}` : 'Drgnz Challenge';
-      if (stage.name !== stageName || !stageName) {
-        this.setState({
-          stageName: stage.name,
-        });
-      }
-    }
+    this.handleStageName();
   }
 
   handleTabChange = tab => this.setState({ tab });
@@ -114,7 +123,7 @@ export class Level extends Component {
   }
 
   render() {
-    const { level = {}, isLoading } = this.props;
+    const { level = {}, isLoading, isSubmitting } = this.props;
     const { stageName, tab } = this.state;
     const { difficulty = 0, tags = [] } = level;
 
@@ -169,6 +178,7 @@ export class Level extends Component {
                 onClick={this.handleSubmitBtnClick}
                 type="submit"
               >
+                {isSubmitting && (<div className="loader" />)}
                 Submit
               </button>
             </div>

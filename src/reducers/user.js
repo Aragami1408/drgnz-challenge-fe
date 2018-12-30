@@ -1,4 +1,5 @@
 import { LOGOUT } from './auth';
+import { SUBMISSION_SUCCESS } from './submission';
 
 export const DOWNLOAD_USER_INFO_START = 'user/DOWNLOAD_USER_INFO_START';
 export const DOWNLOAD_USER_INFO_SUCCESS = 'user/DOWNLOAD_USER_INFO_SUCCESS';
@@ -92,6 +93,18 @@ export default function reducer(state = initialState, action) {
         isLoading: false,
         error: null,
         user,
+      };
+    }
+    case SUBMISSION_SUCCESS: {
+      const { level } = action.payload || {};
+      if (!level) return state;
+      if (!state.user) return state;
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          levels: [...state.user.levels, level],
+        },
       };
     }
     case LOGOUT: {

@@ -94,6 +94,9 @@
     border: none;
     outline: none;
     box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     background-image: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
     border-radius: 5px;
     height: 35px;

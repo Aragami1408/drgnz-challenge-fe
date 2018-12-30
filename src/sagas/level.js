@@ -72,6 +72,7 @@ export function* handleSubmission() {
       if (data.correct) {
         yield put(SubmissionActions.submitFlagSuccess());
         Toast.accepted('Correct!');
+        yield delay(1000);
         HistoryService.goBack();
       } else {
         yield put(SubmissionActions.submitFlagFailed());
