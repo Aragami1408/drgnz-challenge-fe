@@ -25,7 +25,11 @@ export class Stage extends Component {
       match, downloadStageDetail, stage,
     } = this.props;
     const { params } = match;
-    if (!stage || isEmpty(stage)) downloadStageDetail(params.id);
+    console.log(params, stage);
+    if (
+      !stage || isEmpty(stage)
+      || stage._id !== params.id // eslint-disable-line
+    ) downloadStageDetail(params.id);
   }
 
   handleClick = (id) => {

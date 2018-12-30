@@ -55,7 +55,10 @@ export class Level extends Component {
     } = this.props;
     const { params } = match;
     const { tab } = this.state;
-    if (!level || isEmpty(level)) downloadLevelDetail(params.id);
+    if (
+      !level || isEmpty(level)
+      || params.id !== level._id // eslint-disable-line
+    ) downloadLevelDetail(params.id);
     if (isLoading) return;
     ReactDOM.render(
       <ReactMarkdown
