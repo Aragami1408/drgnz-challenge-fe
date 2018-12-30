@@ -24,6 +24,7 @@ export class Card extends Component {
 
   componentDidMount() {
     const { stage } = this.props;
+    // console.log(stage);
     if (!stage.unlockDate) return;
     this.calculateDiff();
     this.timer = setInterval(this.calculateDiff, 1000);
@@ -36,7 +37,7 @@ export class Card extends Component {
   calculateDiff = () => {
     const now = moment();
     const { stage } = this.props;
-    const unlockDate = moment(stage.unlockDate, 'MM/DD/YYYY hh:mm');
+    const unlockDate = moment(stage.unlockDate);
     let total = unlockDate.diff(now, 'seconds');
     const hour = Math.floor(total / 3600);
     total -= hour * 3600;
