@@ -8,9 +8,14 @@ import Toast from '../common/toast';
 import {
   LOGIN_START,
   SIGNUP_START,
-  actions as authAction,
+  LOGIN_SUCCESS,
+  SIGNUP_SUCCESS,
+  actions as AuthActions,
   getToken,
 } from '../reducers/auth';
+import {
+  actions as UserActions,
+} from '../reducers/user';
 import { REHYDRATION_COMPLETE } from '../reducers';
 
 export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
@@ -22,21 +27,21 @@ export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
         timeout: call(delay, 15000),
       });
       if (timeout) {
-        yield put(authAction.loginFailed('Unable to login.\nPlease try again later!'));
+        yield put(AuthActions.loginFailed('Unable to login.\nPlease try again later!'));
         Toast.error('Unable to login.\nPlease try again later!');
         continue;
       }
       const { error, response } = login;
       if (error) {
-        yield put(authAction.loginFailed(Api.getNiceErrorMsg(error.response)));
+        yield put(AuthActions.loginFailed(Api.getNiceErrorMsg(error.response)));
         continue;
       }
       const { data } = response;
       yield call(Api.setToken, data.token);
-      yield put(authAction.loginSuccess(data.token));
+      yield put(AuthActions.loginSuccess(data.token));
       // yield put()
     } catch (error) {
-      yield put(authAction.loginFailed(error));
+      yield put(AuthActions.loginFailed(error));
       console.log(error);
     }
   }
@@ -44,7 +49,7 @@ export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
 
 export function* validateToken() { // eslint-disable-line no-underscore-dangle
   while (true) {
-    yield take(REHYDRATION_COMPLETE);
+    yield take([REHYDRATION_COMPLETE, LOGIN_SUCCESS, SIGNUP_SUCCESS]);
     try {
       const token = yield select(getToken);
       const { id } = decode(token) || {};
@@ -58,13 +63,15 @@ export function* validateToken() { // eslint-disable-line no-underscore-dangle
       }
       const { error, response } = checkToken;
       if (error) {
-        yield put(authAction.logout(Api.getNiceErrorMsg(error.response)));
+        yield put(AuthActions.logout(Api.getNiceErrorMsg(error.response)));
         Toast.error('Your session is expired! Please login again!');
         return;
       }
       const { data } = response;
+      console.log('hahaha', data);
+      yield put(UserActions.downloadUserInfoSuccess(data));
       yield call(Api.setToken, data.token);
-      yield put(authAction.loginSuccess(data.token));
+      yield put(AuthActions.loginSuccess(data.token));
     } catch (error) {
       console.log(error);
     }
@@ -80,22 +87,22 @@ export function* handleRegistration() {
         timeout: call(delay, 15000),
       });
       if (timeout) {
-        yield put(authAction.registerFailed('Unable to connect to server.\nPlease try again later!'));
+        yield put(AuthActions.registerFailed('Unable to connect to server.\nPlease try again later!'));
         Toast.error('Unable to connect to server.\nPlease try again later!');
         continue;
       }
       const { error, response } = register;
       if (error) {
-        yield put(authAction.registerFailed(Api.getNiceErrorMsg(error.response)));
+        yield put(AuthActions.registerFailed(Api.getNiceErrorMsg(error.response)));
         continue;
       }
       Toast.success('Welcome to Drgnz Challenge');
       const { data } = response;
       const { username, token } = data;
       yield call(Api.setToken, data.token);
-      yield put(authAction.registerSuccess(username, token));
+      yield put(AuthActions.registerSuccess(username, token));
     } catch (error) {
-      yield put(authAction.registerFailed(error));
+      yield put(AuthActions.registerFailed(error));
       console.log(error);
     }
   }

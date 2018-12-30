@@ -34,5 +34,7 @@ export default () => {
   return { store, persistor };
 };
 
-// just in case, remove the comment below
+// just in case
+// when there is an unknown and mystery error
+// remove the comment below
 // localStorage.clear();

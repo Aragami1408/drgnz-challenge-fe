@@ -115,7 +115,7 @@ class App extends Component {
           <AuthRoute exact path="/rank" component={Ranking} authenticated={authenticated} />
           <AuthRoute exact path="/level/:id" component={Level} authenticated={authenticated} />
           <AuthRoute exact path="/stage/:id" component={Stage} authenticated={authenticated} />
-          {IAmDrgnz && <AuthRoute exact path="/admin/add-level" component={AddLevel} authenticated={authenticated} />}
+          {IAmDrgnz && <AuthRoute exact path="/admin/level" component={AddLevel} authenticated={authenticated} />}
           <Route component={NotFound} />
           <Footer />
         </div>
@@ -126,8 +126,10 @@ class App extends Component {
   render() {
     const {
       requiresDownload, isDownloadingStage,
-      stageErrorMsg, isLoading, authenticated,
+      stageErrorMsg, isLoading, authenticated, IAmDrgnz,
     } = this.props;
+
+    console.log(IAmDrgnz);
 
     if (!authenticated) return this.renderRouter();
     if (isLoading) return this.renderLoading();

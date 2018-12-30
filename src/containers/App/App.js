@@ -7,6 +7,9 @@ import {
   getError, getStageList,
   getStatus, actions as StagesActions,
 } from '../../reducers/stages';
+import {
+  IAmDrgnz,
+} from '../../reducers/user';
 import { clearTransaction } from '../../reducers/transaction';
 import { getSystemLoadingStatus } from '../../reducers/system';
 import App from '../../comopnents/App';
@@ -17,6 +20,7 @@ const mapStateToProps = state => ({
   requiresDownload: (getStageList(state).length === 0),
   stageErrorMsg: getError(state),
   isLoading: getSystemLoadingStatus(state),
+  IAmDrgnz: IAmDrgnz(state),
 });
 
 const mapDispatchToProps = dispatch => ({
