@@ -12,6 +12,7 @@ export class Stage extends Component {
     downloadStageDetail: PropTypes.func.isRequired,
     stage: PropTypes.objectOf(PropTypes.any),
     isLoading: PropTypes.bool,
+    user: PropTypes.objectOf(PropTypes.any).isRequired,
   }
 
   static defaultProps = {
@@ -30,6 +31,13 @@ export class Stage extends Component {
   handleClick = (id) => {
     const { history } = this.props;
     history.push(`/level/${id}`);
+  }
+
+  checkSolved = (level) => {
+    const { user } = this.props;
+    const { levels } = user;
+    const currentLevel = levels.find(lev => lev.levelId === level._id) // eslint-disable-line
+    return !!(currentLevel || {}).finishedAt;
   }
 
   render() {
@@ -51,6 +59,7 @@ export class Stage extends Component {
                   key={level._id} // eslint-disable-line
                   {...level}
                   stageName={stage.name}
+                  solved={this.checkSolved(level)}
                 />
               ))
               }
