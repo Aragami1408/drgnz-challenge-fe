@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactMarkdown from 'react-markdown/with-html';
 import htmlParser from 'react-markdown/plugins/html-parser';
+import isEmpty from 'lodash/isEmpty';
 import Header from '../../containers/Header';
 import CodeBlock from '../AddLevel/CodeBlock';
 import TagItem from '../TagItem';
+import Loading from '../Loading';
 
 const levelName = ['noob', 'easy', 'normal', 'hard', 'challenge'];
 
@@ -16,10 +18,12 @@ export class Level extends Component {
     stageList: PropTypes.arrayOf(PropTypes.any).isRequired,
     downloadLevelDetail: PropTypes.func.isRequired,
     submitFlag: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool,
   }
 
   static defaultProps = {
     level: {},
+    isLoading: false,
   }
 
 
@@ -45,11 +49,12 @@ export class Level extends Component {
       match,
       downloadLevelDetail,
       level,
+      isLoading,
     } = this.props;
     const { params } = match;
     const { tab } = this.state;
-
     downloadLevelDetail(params.id);
+    if (isLoading) return;
     ReactDOM.render(
       <ReactMarkdown
         source={level[tab] || `There is no ${tab} for this problem.`}
@@ -109,9 +114,11 @@ export class Level extends Component {
   }
 
   render() {
-    const { level = {} } = this.props;
+    const { level = {}, isLoading } = this.props;
     const { stageName, tab } = this.state;
     const { difficulty = 0, tags = [] } = level;
+
+    if (isEmpty(level) || isLoading) return (<Loading />);
 
     return (
       <div id="level" className={`level-${stageName}`}>
@@ -122,7 +129,7 @@ export class Level extends Component {
         <div className="level-wrapper">
           <div className="level">
             <div className="level-title">
-              {level.name || 'Sample'}
+              {level.name || 'Loading...'}
             </div>
             <div className="level-tags">
               <TagItem>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 import Header from '../../containers/Header';
 import LevelItem from '../LevelItem';
+import Loading from '../Loading';
 
 export class Stage extends Component {
   static propTypes = {
@@ -9,10 +11,12 @@ export class Stage extends Component {
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     downloadStageDetail: PropTypes.func.isRequired,
     stage: PropTypes.objectOf(PropTypes.any),
+    isLoading: PropTypes.bool,
   }
 
   static defaultProps = {
     stage: {},
+    isLoading: false,
   }
 
   componentDidMount() {
@@ -29,20 +33,13 @@ export class Stage extends Component {
     history.push(`/level/${id}`);
   }
 
-  renderLoading = () => (
-    <div className="loading">
-      <div className="app-loader" />
-      <div>Loading</div>
-    </div>
-  )
-
   render() {
-    const { stage } = this.props;
+    const { stage = {}, isLoading } = this.props;
     const { levelList = [] } = stage || {};
-    if (!stage) return this.renderLoading();
+    if (isEmpty(stage) || isLoading) return (<Loading />);
     return (
       <div id="stage" className={`stage-${stage.name}`}>
-        <Header title={`The ${stage.name}`} />
+        <Header title={stage.name ? `The ${stage.name}` : ''} />
         <div className="stage-wrapper">
           <div className="stage">
             <div className="stage-title">

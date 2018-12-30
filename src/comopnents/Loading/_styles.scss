@@ -1,0 +1,50 @@
+.App {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: #f6f6f6;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // flex-direction: row-reverse;
+  height: 100%;
+  background: linear-gradient(-90deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  font-size: 72px;
+  font-weight: bold;
+}
+
+.app-loader{
+  border: 5px solid;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border-color:#23A6D5 #23A6D5 #23A6D5 transparent;
+  animation: spin 2s linear infinite;
+  margin-right: 15px;
+}
+
+.app-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  color: #333;
+  .app-error-title {
+    font-size: 68px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .app-error-message {
+    font-size: 72px;
+  }
+}

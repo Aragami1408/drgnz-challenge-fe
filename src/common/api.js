@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // const apiUrl = 'https://drgnz-challenge-zkuefmyjwn.now.sh';
-const apiUrl = 'http://localhost:3001';
-// const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
+// const apiUrl = 'http://localhost:3001';
+const apiUrl = 'https://drgnz-challenge-api.herokuapp.com';
 // authenticate path
 const LOGIN_PATH = '/api/auth/login';
 const REGISTER_PATH = '/api/auth/register';

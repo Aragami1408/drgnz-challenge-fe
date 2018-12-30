@@ -6,7 +6,7 @@ import DropdownMenu from '../DropdownMenu';
 export class Header extends PureComponent {
   static propTypes = {
     username: PropTypes.string,
-    fullname: PropTypes.string,
+    fullName: PropTypes.string,
     logout: PropTypes.func.isRequired,
     title: PropTypes.string,
     location: PropTypes.string,
@@ -14,7 +14,7 @@ export class Header extends PureComponent {
 
   static defaultProps = {
     location: '/',
-    fullname: '',
+    fullName: '',
     username: '',
     title: 'Drgnz Challenge',
   }
@@ -26,7 +26,7 @@ export class Header extends PureComponent {
 
   render() {
     const {
-      username, fullname,
+      username, fullName,
       logout, title,
     } = this.props;
 
@@ -40,7 +40,7 @@ export class Header extends PureComponent {
           {title}
         </div>
         <div className="header-user">
-          <span>{`Hi there, ${username || fullname || 'Drgnz'}`}</span>
+          <span>{`Hi there, ${fullName || username || 'Drgnz'}`}</span>
           <DropdownMenu logout={logout} />
         </div>
       </div>

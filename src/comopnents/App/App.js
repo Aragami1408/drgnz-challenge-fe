@@ -27,6 +27,7 @@ import Stage from '../../containers/Stage';
 import Ranking from '../Ranking';
 import AuthRoute from '../AuthRoute';
 import NotAuthRoute from '../NotAuthRoute';
+import Loading from '../Loading';
 
 library.add(
   fab,
@@ -126,13 +127,13 @@ class App extends Component {
   render() {
     const {
       requiresDownload, isDownloadingStage,
-      stageErrorMsg, isLoading, authenticated, IAmDrgnz,
+      stageErrorMsg, isLoading, authenticated,
     } = this.props;
 
     if (!authenticated) return this.renderRouter();
-    if (isLoading) return this.renderLoading();
+    if (isLoading) return (<Loading />);
     if (requiresDownload && stageErrorMsg) return this.renderError(stageErrorMsg);
-    if (requiresDownload && isDownloadingStage) return this.renderLoading();
+    if (requiresDownload && isDownloadingStage) return (<Loading />);
     return this.renderRouter();
   }
 }
