@@ -17,6 +17,7 @@ import {
   actions as UserActions,
 } from '../reducers/user';
 import { REHYDRATION_COMPLETE } from '../reducers';
+import { clearTransaction } from '../reducers/transaction';
 
 export function* handleUserLogin() { // eslint-disable-line no-underscore-dangle
   while (true) {
@@ -71,6 +72,7 @@ export function* validateToken() { // eslint-disable-line no-underscore-dangle
       yield put(UserActions.downloadUserInfoSuccess(data));
       yield call(Api.setToken, data.token);
       yield put(AuthActions.loginSuccess(data.token));
+      yield put(clearTransaction());
     } catch (error) {
       yield put(AuthActions.loginFailed(error.message));
       console.log(error);

@@ -5,6 +5,7 @@ import stages from './stages';
 import level from './level';
 import stage from './stage';
 import user from './user';
+import admin from './admin';
 import submission from './submission';
 
 export const REHYDRATION_COMPLETE = 'REHYDRATION_COMPLETE';
@@ -17,5 +18,6 @@ export default combineReducers({
   level,
   stage,
   user,
+  admin,
   submission,
 });

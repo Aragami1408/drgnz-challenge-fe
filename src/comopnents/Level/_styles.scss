@@ -73,6 +73,8 @@
   height: 100%;
   overflow-y: auto;
   margin-top: 25px;
+  overflow: auto;
+  overflow-wrap: break-word;
 }
 
 .level-submission {

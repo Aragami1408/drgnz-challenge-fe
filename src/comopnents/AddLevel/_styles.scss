@@ -35,4 +35,19 @@
   color: #666;
   margin-left: 15px;
   text-align: left;
+  overflow: scroll;
+  overflow-wrap: break-word;
+}
+
+.card-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  .card-input {
+    width: 49%;
+    margin: 0px;
+    height: 100%;
+  }
 }

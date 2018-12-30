@@ -9,7 +9,7 @@ import CodeBlock from '../AddLevel/CodeBlock';
 import TagItem from '../TagItem';
 import Loading from '../Loading';
 
-const levelName = ['noob', 'easy', 'normal', 'hard', 'challenge'];
+const levelName = ['noob', 'easy', 'normal', 'hard', 'challenge', 'nightmare'];
 
 export class Level extends Component {
   static propTypes = {

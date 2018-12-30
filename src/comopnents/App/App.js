@@ -22,7 +22,7 @@ import Footer from '../Footer';
 import NotFound from '../NotFound';
 import About from '../About';
 import Account from '../../containers/Account';
-import AddLevel from '../AddLevel';
+import AddLevel from '../../containers/AddLevel';
 import Stage from '../../containers/Stage';
 import Ranking from '../Ranking';
 import AuthRoute from '../AuthRoute';

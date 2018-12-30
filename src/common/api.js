@@ -197,6 +197,25 @@ const updateUserInformation = async (id, user, optionalConfig = {}) => {
   }
 };
 
+const submitNewLevel = async (formData, optionalConfig = {}) => {
+  try {
+    const response = await axios({
+      ...optionalConfig,
+      method: 'POST',
+      baseURL: apiUrl,
+      url: LEVEL_PATH,
+      headers: {
+        ...(axios.defaults.headers || {}),
+        'Content-Type': 'application/json',
+      },
+      data: formData,
+    });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
 const Api = {
   setDefaults,
   setToken,
@@ -209,6 +228,7 @@ const Api = {
   getUserDetail,
   submitFlag,
   updateUserInformation,
+  submitNewLevel,
 };
 
 export default Api;

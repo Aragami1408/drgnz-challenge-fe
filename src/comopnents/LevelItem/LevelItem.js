@@ -3,7 +3,7 @@ import keys from 'lodash/keys';
 import PropTypes from 'prop-types';
 import TagItem from '../TagItem';
 
-const levelName = ['noob', 'easy', 'normal', 'hard', 'challenge'];
+const levelName = ['noob', 'easy', 'normal', 'hard', 'challenge', 'nightmare'];
 
 const LevelItem = ({
   onClick, name, difficulty,
